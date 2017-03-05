@@ -31,11 +31,6 @@ class Ui_CustomerDialog(object):
         self.pushButton_3.setIcon(icon)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
-        self.pushButton_2 = QtWidgets.QPushButton(CustomerDialog)
-        icon = QtGui.QIcon.fromTheme("edit-delete")
-        self.pushButton_2.setIcon(icon)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(CustomerDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -53,5 +48,4 @@ class Ui_CustomerDialog(object):
         CustomerDialog.setWindowTitle(_translate("CustomerDialog", "Выбор заказчика"))
         self.btnAdd.setText(_translate("CustomerDialog", "Добавить"))
         self.pushButton_3.setText(_translate("CustomerDialog", "Изменить"))
-        self.pushButton_2.setText(_translate("CustomerDialog", "Удалить"))
 

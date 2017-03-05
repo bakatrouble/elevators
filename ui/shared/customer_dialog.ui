@@ -49,17 +49,7 @@
         <string>Изменить</string>
        </property>
        <property name="icon">
-        <iconset theme="document-edit"/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>Удалить</string>
-       </property>
-       <property name="icon">
-        <iconset theme="edit-delete">
+        <iconset theme="document-edit">
          <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
