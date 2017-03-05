@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
 import sys
 
 from PyQt5.QtCore import QLocale
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
+from PyQt5.QtWidgets import QApplication
 
 import utils
 from shared.main_window import MainWindow
