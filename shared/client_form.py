@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import QDialog
 
-from ui.shared.customer_form import Ui_CustomerForm
+from ui.shared.client_form import Ui_CustomerForm
 
 
-class CustomerForm(QDialog):
+class ClientForm(QDialog):
     def __init__(self, parent=None):
-        super(CustomerForm, self).__init__(parent)
+        super(ClientForm, self).__init__(parent)
         self.ui = Ui_CustomerForm()
         self.ui.setupUi(self)
