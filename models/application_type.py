@@ -15,7 +15,7 @@ class ApplicationType:
         self._changed = False
 
     @classmethod
-    def from_dict(cls, data):
+    def fromDict(cls, data):
         obj = cls()
         obj.id = data['id']
         obj.name = data['name']
@@ -31,10 +31,11 @@ class ApplicationTypeModel(QStringListModel, BaseModel):
     url = 'api/application_types/'
     item_class = ApplicationType
 
-    def data(self, index, role):
+    @classmethod
+    def data(cls, index, role):
         if role == Qt.DisplayRole:
             row = index.row()
-            return self._items[row].name
+            return cls._items[row].name
         return None
 
     def columnCount(self, *args, **kwargs):

@@ -16,9 +16,10 @@ class BaseModel:
         data = requests.get('http://127.0.0.1:8000/' + cls.url).json()
         cls._items = []
         for item in data:
-            cls._items.append(cls.item_class.from_dict(item))
+            cls._items.append(cls.item_class.fromDict(item))
 
-    def data(self, index, role):
+    @classmethod
+    def data(cls, index, role):
         raise NotImplementedError
 
     def index(self, row, column=0, parent=None, *args, **kwargs):
@@ -40,3 +41,7 @@ class BaseModel:
     @classmethod
     def addItem(cls, item):
         cls._items.append(item)
+
+    @classmethod
+    def item(cls, index):
+        return cls._items[index]

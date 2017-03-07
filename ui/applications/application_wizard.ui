@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QDateEdit" name="dateEdit">
+     <widget class="QDateEdit" name="edtDate">
       <property name="calendarPopup">
        <bool>true</bool>
       </property>

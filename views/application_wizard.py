@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
+
+from models.application import Application
 from models.application_data import DataTableModel, DataTableDelegate
 
 from controllers.client import ClientController
 from models.application_type import ApplicationTypeModel
-from models.client import ClientModel
 from ui.applications.application_wizard import Ui_ApplicationWizard
-from views.client_dialog import ClientDialog
 
 
 class ApplicationWizard(QWizard):
@@ -19,6 +19,7 @@ class ApplicationWizard(QWizard):
         self.setupUi()
 
         self._client = None
+        self._application = Application()
 
     def setupSignals(self):
         self.ui.btnSelectCustomer.clicked.connect(self.selectClient)
@@ -43,3 +44,11 @@ class ApplicationWizard(QWizard):
         if result == QDialog.Accepted and client:
             self._client = client
             self.ui.lblCustomer.setText(client.short_name)
+
+    def getApplication(self):
+        self._application.date = self.ui.edtDate.date().toPyDate()
+        self._application.client = self._client
+        typeIndex = self.ui.cmbApplicationType.currentIndex()
+        self._application.type = self.ui.cmbApplicationType.model().item(typeIndex)
+        self._application.entries = self.ui.tblElevatorsData.model().getApplicationEntries()
+        return self._application

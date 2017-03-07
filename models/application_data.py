@@ -3,6 +3,7 @@ from datetime import date
 from PyQt5.QtCore import QAbstractTableModel, QAbstractItemModel, QModelIndex, Qt, QDate
 from PyQt5.QtWidgets import QDateEdit, QLineEdit, QSpinBox, QStyledItemDelegate, QWidget
 
+from models.application import ApplicationEntry
 from shared.address import Address, AddressDialog
 
 
@@ -177,3 +178,9 @@ class DataTableModel(QAbstractTableModel):
             return base
         else:
             return base | Qt.ItemIsEditable
+
+    def getApplicationEntries(self):
+        entries = []
+        for item in self._items:
+            entries.append(ApplicationEntry.fromDataTableItem(item))
+        return entries

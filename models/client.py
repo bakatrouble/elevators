@@ -21,7 +21,7 @@ class Client:
         self._changed = False
 
     @classmethod
-    def from_dict(cls, data):
+    def fromDict(cls, data):
         obj = cls()
         obj.id = data['id']
         obj.full_name = data['full_name']

@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QWidget
 
+from controllers.application import ApplicationController
+from models.application import ApplicationModel
 from ui.applications.applications_tab import Ui_ApplicationsTab
-from views.application_wizard import ApplicationWizard
 
 
 class ApplicationsTab(QWidget):
@@ -10,12 +11,14 @@ class ApplicationsTab(QWidget):
         self.ui = Ui_ApplicationsTab()
         self.ui.setupUi(self)
 
+        self.setupUi()
         self.setupSignals()
+
+    def setupUi(self):
+        self.ui.tableView.setModel(ApplicationModel())
 
     def setupSignals(self):
         self.ui.buttonWizard.clicked.connect(self.createApplication)
 
     def createApplication(self):
-        wizard = ApplicationWizard(self)
-        result = wizard.exec()
-        pass
+        ApplicationController.create(self) and self.ui.tableView.model().modelReset.emit()

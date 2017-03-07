@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'applications_tab.ui'
 #
-# Created by: PyQt5 UI code generator 5.7.1
+# Created by: PyQt5 UI code generator 5.8
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -16,6 +16,7 @@ class Ui_ApplicationsTab(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.tableView = QtWidgets.QTableView(ApplicationsTab)
         self.tableView.setObjectName("tableView")
+        self.tableView.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.tableView)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")

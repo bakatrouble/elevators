@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'application_wizard.ui'
 #
-# Created by: PyQt5 UI code generator 5.7.1
+# Created by: PyQt5 UI code generator 5.8
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,10 +19,10 @@ class Ui_ApplicationWizard(object):
         self.label_3 = QtWidgets.QLabel(self.wizardPage1)
         self.label_3.setObjectName("label_3")
         self.verticalLayout.addWidget(self.label_3)
-        self.dateEdit = QtWidgets.QDateEdit(self.wizardPage1)
-        self.dateEdit.setCalendarPopup(True)
-        self.dateEdit.setObjectName("dateEdit")
-        self.verticalLayout.addWidget(self.dateEdit)
+        self.edtDate = QtWidgets.QDateEdit(self.wizardPage1)
+        self.edtDate.setCalendarPopup(True)
+        self.edtDate.setObjectName("edtDate")
+        self.verticalLayout.addWidget(self.edtDate)
         self.label = QtWidgets.QLabel(self.wizardPage1)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
