@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt, QStringListModel
 
-from shared.models.rest_model import RestApiModel
+from models.base_model import BaseModel
 
 
 class Client:
@@ -17,6 +17,8 @@ class Client:
         self.bank = ''
         self.bik = ''
         self.ogrn = ''
+
+        self._changed = False
 
     @classmethod
     def from_dict(cls, data):
@@ -36,7 +38,7 @@ class Client:
         return obj
 
 
-class ClientModel(QStringListModel, RestApiModel):
+class ClientModel(QStringListModel, BaseModel):
     _items = []
     url = 'api/clients/'
     item_class = Client

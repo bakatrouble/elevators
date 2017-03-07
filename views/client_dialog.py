@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QDialogButtonBox
 
-from shared.models.client_model import ClientModel
+from controllers.client import ClientController
+from models.client import ClientModel
 from ui.shared.client_dialog import Ui_ClientDialog
-from shared.client_form import ClientForm
+from views.client_form import ClientForm
 
 
 class ClientDialog(QDialog):
@@ -23,7 +24,8 @@ class ClientDialog(QDialog):
         self.ui.btnEdit.setEnabled(False)
 
     def setupSignals(self):
-        self.ui.btnAdd.clicked.connect(self.addCustomer)
+        self.ui.btnAdd.clicked.connect(self.addClient)
+        self.ui.btnEdit.clicked.connect(self.editClient)
         self.ui.lstClients.doubleClicked.connect(self.accept)
         self.ui.lstClients.clicked.connect(self.selectionChanged)
 
@@ -35,7 +37,12 @@ class ClientDialog(QDialog):
     def getResult(self):
         return self._result
 
-    def addCustomer(self):
-        dlg = ClientForm(self)
-        if dlg.exec() == ClientForm.Accepted:
-            pass
+    def getCurrent(self):
+        return self.ui.lstClients.currentIndex().internalPointer()
+
+    def addClient(self):
+        ClientController.create(self) and self.ui.lstClients.reset()
+
+    def editClient(self):
+        ClientController.edit(self.getCurrent(), self) and self.ui.lstClients.reset()
+

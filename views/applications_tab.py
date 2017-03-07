@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 
 from ui.applications.applications_tab import Ui_ApplicationsTab
-from .application_wizard import ApplicationWizard
+from views.application_wizard import ApplicationWizard
 
 
 class ApplicationsTab(QWidget):

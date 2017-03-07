@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget
 
-from applications.applications_tab import ApplicationsTab
 from ui.shared.main_window import Ui_MainWindow
+from views.applications_tab import ApplicationsTab
 
 
 class MainWindow(QMainWindow):

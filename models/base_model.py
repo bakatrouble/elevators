@@ -1,13 +1,13 @@
 import requests
 
 
-class RestApiModel:
+class BaseModel:
     item_class = None
     url = ''
     _items = []
 
     def __init__(self):
-        super(RestApiModel, self).__init__()
+        super(BaseModel, self).__init__()
         if not self._items:
             self.loadData()
 
@@ -32,5 +32,11 @@ class RestApiModel:
 
     @classmethod
     def getItemById(cls, item_id):
-        item = list(filter(lambda x: x.id == item_id, cls._items))
-        return item[0] if item else None
+        try:
+            return next(x for x in cls._items if x.id == item_id)
+        except StopIteration:
+            return None
+
+    @classmethod
+    def addItem(cls, item):
+        cls._items.append(item)

@@ -5,7 +5,7 @@ from PyQt5.QtCore import QLocale
 from PyQt5.QtWidgets import QApplication
 
 import utils
-from shared.main_window import MainWindow
+from views.main_window import MainWindow
 
 if __name__ == '__main__':
     # setting exception hook for pycharm

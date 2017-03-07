@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt, QStringListModel
 
-from shared.models.rest_model import RestApiModel
+from models.base_model import BaseModel
 
 
 class ApplicationType:
@@ -11,6 +11,8 @@ class ApplicationType:
         self.application_template = ''
         self.contract_template = ''
         self.order_template = ''
+
+        self._changed = False
 
     @classmethod
     def from_dict(cls, data):
@@ -24,7 +26,7 @@ class ApplicationType:
         return obj
 
 
-class ApplicationTypeModel(QStringListModel, RestApiModel):
+class ApplicationTypeModel(QStringListModel, BaseModel):
     _items = []
     url = 'api/application_types/'
     item_class = ApplicationType

@@ -1,11 +1,12 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
+from models.application_data import DataTableModel, DataTableDelegate
 
-from applications.models.application_type import ApplicationTypeModel
-from shared.client_dialog import ClientDialog
-from shared.models.client_model import ClientModel
+from controllers.client import ClientController
+from models.application_type import ApplicationTypeModel
+from models.client import ClientModel
 from ui.applications.application_wizard import Ui_ApplicationWizard
+from views.client_dialog import ClientDialog
 
 
 class ApplicationWizard(QWizard):
@@ -27,6 +28,8 @@ class ApplicationWizard(QWizard):
     def setupUi(self):
         self.ui.tblElevatorsData.horizontalHeader().setVisible(True)
         self.ui.cmbApplicationType.setModel(ApplicationTypeModel())
+        self.ui.tblElevatorsData.setModel(DataTableModel())
+        self.ui.tblElevatorsData.setItemDelegate(DataTableDelegate())
 
     def addTableItem(self):
         self.ui.tblElevatorsData.model().addItem()
@@ -36,8 +39,7 @@ class ApplicationWizard(QWizard):
         self.ui.tblElevatorsData.model().removeItems(rows)
 
     def selectClient(self):
-        dlg = ClientDialog(self)
-        if dlg.exec() == ClientDialog.Accepted:
-            self._client = ClientModel.getItemById(dlg.getResult())
-            if self._client:
-                self.ui.lblCustomer.setText(self._client.short_name)
+        result, client = ClientController.choose(self)
+        if result == QDialog.Accepted and client:
+            self._client = client
+            self.ui.lblCustomer.setText(client.short_name)
