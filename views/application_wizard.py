@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
 
-from models.application import Application
-from models.application_data import DataTableModel, DataTableDelegate
+from models.application import Application, DataTableModel, DataTableDelegate
 
 from controllers.client import ClientController
 from models.application_type import ApplicationTypeModel
@@ -46,9 +45,17 @@ class ApplicationWizard(QWizard):
             self.ui.lblCustomer.setText(client.short_name)
 
     def getApplication(self):
-        self._application.date = self.ui.edtDate.date().toPyDate()
+        self._application.date = self.ui.edtDate.date()
         self._application.client = self._client
         typeIndex = self.ui.cmbApplicationType.currentIndex()
         self._application.type = self.ui.cmbApplicationType.model().item(typeIndex)
         self._application.entries = self.ui.tblElevatorsData.model().getApplicationEntries()
         return self._application
+
+    def setApplication(self, application: Application):
+        self._application = application
+        self.ui.edtDate.setDate(application.date)
+        self._client = application.client
+        self.ui.lblCustomer.setText(application.client.short_name)
+        self.ui.cmbApplicationType.setCurrentIndex(self.ui.cmbApplicationType.model().getIndexById(application.type.id))
+        self.ui.tblElevatorsData.model().setApplicationEntries(application.entries)

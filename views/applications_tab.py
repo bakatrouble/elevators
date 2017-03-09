@@ -19,6 +19,11 @@ class ApplicationsTab(QWidget):
 
     def setupSignals(self):
         self.ui.buttonWizard.clicked.connect(self.createApplication)
+        self.ui.tableView.doubleClicked.connect(self.editApplication)
 
     def createApplication(self):
         ApplicationController.create(self) and self.ui.tableView.model().modelReset.emit()
+
+    def editApplication(self):
+        application = self.ui.tableView.currentIndex().internalPointer()
+        ApplicationController.edit(application, self) and self.ui.tableView.model().modelReset.emit()

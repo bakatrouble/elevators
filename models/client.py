@@ -36,6 +36,22 @@ class Client:
         obj.bik = data['bik']
         obj.ogrn = data['ogrn']
         return obj
+    
+    def toDict(self):
+        return {
+            'id': self.id,
+            'full_name': self.full_name,
+            'short_name': self.short_name,
+            'registration_address': self.registration_address,
+            'location_address': self.location_address,
+            'phone': self.phone,
+            'inn': self.inn,
+            'kpp': self.kpp,
+            'account_number': self.account_number,
+            'bank': self.bank,
+            'bik': self.bik,
+            'ogrn': self.ogrn,
+        }
 
 
 class ClientModel(QStringListModel, BaseModel):

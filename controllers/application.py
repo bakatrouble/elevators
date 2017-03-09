@@ -18,17 +18,20 @@ class ApplicationController:
         dlg = ApplicationWizard(parent)
         result = dlg.exec()
         if result == ApplicationWizard.Accepted:
-            cls.model.addItem(dlg.getApplication())
+            application = dlg.getApplication()
+            cls.model.saveItem(application)
+            cls.model.addItem(application)
             return True
         return False
 
-    @staticmethod
-    def edit(application, parent=None):
+    @classmethod
+    def edit(cls, application, parent=None):
         from views.application_wizard import ApplicationWizard
         dlg = ApplicationWizard(parent)
         dlg.setApplication(application)
         result = dlg.exec()
         if result == ApplicationWizard.Accepted:
-            dlg.getApplication()
+            application = dlg.getApplication()
+            cls.model.saveItem(application)
             return True
         return False

@@ -19,17 +19,20 @@ class ClientController:
         dlg = ClientForm(parent)
         result = dlg.exec()
         if result == ClientForm.Accepted:
-            cls.model.addItem(dlg.getClient())
+            client = dlg.getClient()
+            cls.model.saveItem(client)
+            cls.model.addItem(client)
             return True
         return False
 
-    @staticmethod
-    def edit(client, parent=None):
+    @classmethod
+    def edit(cls, client, parent=None):
         from views.client_form import ClientForm
         dlg = ClientForm(parent)
         dlg.setClient(client)
         result = dlg.exec()
         if result == ClientForm.Accepted:
-            dlg.getClient()
+            client = dlg.getClient()
+            cls.model.saveItem(client)
             return True
         return False
