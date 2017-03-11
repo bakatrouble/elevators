@@ -17,6 +17,8 @@ class Client:
         self.bank = ''
         self.bik = ''
         self.ogrn = ''
+        self.person_name = ''
+        self.person_post = ''
 
         self._changed = False
 
@@ -35,6 +37,8 @@ class Client:
         obj.bank = data['bank']
         obj.bik = data['bik']
         obj.ogrn = data['ogrn']
+        obj.person_name = data['person_name']
+        obj.person_post = data['person_post']
         return obj
     
     def toDict(self):
@@ -51,6 +55,8 @@ class Client:
             'bank': self.bank,
             'bik': self.bik,
             'ogrn': self.ogrn,
+            'person_name': self.person_name,
+            'person_post': self.person_post,
         }
 
 

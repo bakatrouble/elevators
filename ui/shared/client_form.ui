@@ -26,9 +26,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-384</y>
+        <y>-570</y>
         <width>368</width>
-        <height>634</height>
+        <height>818</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -154,6 +154,26 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>ФИО заказчика</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="edtPersonName"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Должность заказчика</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="edtPersonPost"/>
        </item>
       </layout>
      </widget>

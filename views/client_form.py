@@ -25,6 +25,8 @@ class ClientForm(QDialog):
         self.ui.edtBank.setText(self._client.bank)
         self.ui.edtBIK.setText(self._client.bik)
         self.ui.edtOGRN.setText(self._client.ogrn)
+        self.ui.edtPersonName.setText(self._client.person_name)
+        self.ui.edtPersonPost.setText(self._client.person_post)
 
     def getClient(self):
         self._client.full_name = self.ui.edtFullName.text()
@@ -38,5 +40,7 @@ class ClientForm(QDialog):
         self._client.bank = self.ui.edtBank.text()
         self._client.bik = self.ui.edtBIK.text()
         self._client.ogrn = self.ui.edtOGRN.text()
+        self._client.person_name = self.ui.edtPersonName.text()
+        self._client.person_post = self.ui.edtPersonName.text()
         self._client._changed = True
         return self._client
