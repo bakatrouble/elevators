@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
             self.ui.btnEditContract.setEnabled(False)
             self.ui.btnCreateContract.setEnabled(True)
             # self.ui.btnPrintContract.setEnabled(False)
-            self.ui.lblContractNumber.setText('№')
+            self.ui.lblContractNumber.setText('не создан')
 
     def setupAccount(self):
         pass

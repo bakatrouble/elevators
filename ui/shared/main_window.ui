@@ -155,7 +155,7 @@
                <item>
                 <widget class="QLabel" name="lblContractNumber">
                  <property name="text">
-                  <string>№</string>
+                  <string>не создан</string>
                  </property>
                 </widget>
                </item>
@@ -215,7 +215,7 @@
                <item>
                 <widget class="QLabel" name="lblAccountNumber">
                  <property name="text">
-                  <string>№</string>
+                  <string>не создан</string>
                  </property>
                 </widget>
                </item>
@@ -275,7 +275,7 @@
                <item>
                 <widget class="QLabel" name="lblOrderNumber">
                  <property name="text">
-                  <string>№</string>
+                  <string>не создан</string>
                  </property>
                 </widget>
                </item>
