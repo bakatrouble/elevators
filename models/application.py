@@ -8,7 +8,8 @@ from models.base_model import BaseModel
 from models.client import ClientModel
 from models.contract import Contract
 from models.account import Account
-from shared.address import Address, AddressDialog
+from models.address import Address
+from views.address import AddressDialog
 
 
 class ApplicationEntry:
