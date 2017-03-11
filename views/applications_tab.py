@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 
 from controllers.application import ApplicationController
+from controllers.contract import ContractController
 from models.application import ApplicationModel
 from ui.applications.applications_tab import Ui_ApplicationsTab
 
@@ -19,11 +20,22 @@ class ApplicationsTab(QWidget):
 
     def setupSignals(self):
         self.ui.buttonWizard.clicked.connect(self.createApplication)
+        self.ui.buttonContract.clicked.connect(self.createContract)
         self.ui.tableView.doubleClicked.connect(self.editApplication)
+        self.ui.tableView.clicked.connect(self.selectionChanged)
+
+    def selectedApplication(self):
+        return self.ui.tableView.currentIndex().internalPointer()
+
+    def selectionChanged(self, index):
+        self.ui.buttonContract.setEnabled(index.isValid())
+
+    def createContract(self):
+        ContractController.create(self.selectedApplication(), self)
 
     def createApplication(self):
         ApplicationController.create(self) and self.ui.tableView.model().modelReset.emit()
 
     def editApplication(self):
-        application = self.ui.tableView.currentIndex().internalPointer()
+        application = self.selectedApplication()
         ApplicationController.edit(application, self) and self.ui.tableView.model().modelReset.emit()

@@ -8,6 +8,7 @@ import utils
 from models.application import ApplicationModel
 from models.application_type import ApplicationTypeModel
 from models.client import ClientModel
+from models.contract import ContractModel
 from views.main_window import MainWindow
 
 
@@ -15,6 +16,7 @@ def loadModels():
     ApplicationTypeModel.loadData()
     ClientModel.loadData()
     ApplicationModel.loadData()
+    ContractModel.loadData()
 
 if __name__ == '__main__':
     # setting exception hook for pycharm

@@ -1,10 +1,10 @@
 import json
 
 import requests
-from PyQt5.QtCore import QModelIndex
+from PyQt5.QtCore import QAbstractItemModel, QModelIndex
 
 
-class BaseModel:
+class BaseModel(QAbstractItemModel):
     item_class = None
     url = ''
     _items = []
@@ -31,7 +31,7 @@ class BaseModel:
             requests.put('http://127.0.0.1:8000/' + cls.url + str(item.id) + '/', json=item.toDict())
 
     @classmethod
-    def data(cls, index, role):
+    def data(cls, index, role=None):
         raise NotImplementedError
 
     def index(self, row, column=0, parent=None, *args, **kwargs):

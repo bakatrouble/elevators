@@ -1,9 +1,9 @@
-from PyQt5.QtCore import QAbstractTableModel, Qt, QModelIndex, QDate
+from PyQt5.QtCore import QAbstractTableModel, QModelIndex
 from PyQt5.QtCore import QDate
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyledItemDelegate, QLineEdit, QWidget, QSpinBox, QDateEdit
 
-from models.application_type import ApplicationType, ApplicationTypeModel
+from models.application_type import ApplicationTypeModel
 from models.base_model import BaseModel
 from models.client import ClientModel
 from shared.address import Address, AddressDialog
