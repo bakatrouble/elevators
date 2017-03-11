@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QStyledItemDelegate, QLineEdit, QWidget, QSpinBox, Q
 from models.application_type import ApplicationTypeModel
 from models.base_model import BaseModel
 from models.client import ClientModel
+from models.contract import Contract
 from shared.address import Address, AddressDialog
 
 
@@ -162,6 +163,11 @@ class Application:
         self.client = None
         self.entries = []
 
+        self.contract = None
+        self.account = None
+        self.order = None
+        self.protocols = []
+
     @classmethod
     def fromDict(cls, data):
         obj = cls()
@@ -171,6 +177,8 @@ class Application:
         obj.client = ClientModel.getItemById(data['client'])
         for item in data['entries']:
             obj.entries.append(ApplicationEntry.fromDict(item))
+        if data['contract']:
+            obj.contract = Contract.fromDict(data['contract'])
         return obj
 
     def toDict(self):
@@ -192,27 +200,12 @@ class ApplicationModel(QAbstractTableModel, BaseModel):
     def data(cls, index, role=None):
         if role == Qt.DisplayRole:
             row = index.row()
-            column = index.column()
-            if column == 0:
-                return QDate(cls._items[row].date).toString(Qt.DefaultLocaleShortDate)
-            elif column == 1:
-                return cls._items[row].client.short_name if cls._items[row].client else ''
-            elif column == 2:
-                return cls._items[row].type.name
+            return '№%s от %s, %s, %s' % (cls._items[row].id, cls._items[row].date.toString(Qt.DefaultLocaleShortDate),
+                                          cls._items[row].client.short_name, cls._items[row].type.name)
         return None
 
     def columnCount(self, *args, **kwargs):
-        return 3
-
-    def headerData(self, column, orientation, role=None):
-        if role == Qt.DisplayRole:
-            if column == 0:
-                return 'Дата создания'
-            elif column == 1:
-                return 'Заказчик'
-            elif column == 2:
-                return 'Тип заявки'
-        return None
+        return 1
 
 
 class DataTableModel(QAbstractTableModel):

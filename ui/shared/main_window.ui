@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>857</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,398 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget"/>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="childrenCollapsible">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="verticalWidget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+            <number>6</number>
+           </property>
+           <property name="topMargin">
+            <number>6</number>
+           </property>
+           <property name="rightMargin">
+            <number>6</number>
+           </property>
+           <property name="bottomMargin">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Заявки</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QListView" name="tblApplications"/>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_2" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <spacer name="spacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnPrintApplication">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Печать</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnCreateApplication">
+                <property name="text">
+                 <string>Создать</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnEditApplication">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Изменить</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QScrollArea" name="pnlDocuments">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>500</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>500</width>
+             <height>522</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>6</number>
+            </property>
+            <property name="topMargin">
+             <number>6</number>
+            </property>
+            <property name="rightMargin">
+             <number>6</number>
+            </property>
+            <property name="bottomMargin">
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Договор</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="horizontalWidget" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLabel" name="lblContractNumber">
+                 <property name="text">
+                  <string>№</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnPrintContract">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Печать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCreateContract">
+                 <property name="text">
+                  <string>Создать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnEditContract">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Изменить</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Счет</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="horizontalWidget_2" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QLabel" name="lblAccountNumber">
+                 <property name="text">
+                  <string>№</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnPrintAccount">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Печать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCreateAccount">
+                 <property name="text">
+                  <string>Создать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnEditAccount">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Изменить</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Приказ</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="horizontalWidget_3" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="lblOrderNumber">
+                 <property name="text">
+                  <string>№</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnPrintOrder">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Печать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCreateOrder">
+                 <property name="text">
+                  <string>Создать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnEditOrder">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Изменить</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Протоколы</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListView" name="tblProtocols"/>
+            </item>
+            <item>
+             <widget class="QWidget" name="horizontalWidget_4" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnPrintProtocol">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Печать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_12">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Удалить</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCreateProtocol">
+                 <property name="text">
+                  <string>Создать</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnEditProtocol">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Изменить</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,27 +416,12 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>23</height>
+     <width>857</width>
+     <height>30</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionApplications">
-   <property name="text">
-    <string>Заявки</string>
-   </property>
-  </action>
-  <action name="actionContracts">
-   <property name="text">
-    <string>Договоры</string>
-   </property>
-  </action>
-  <action name="actionOrders">
-   <property name="text">
-    <string>Приказы</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>
