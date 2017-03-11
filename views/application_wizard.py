@@ -21,7 +21,7 @@ class ApplicationWizard(QWizard):
         self._application = Application()
 
     def setupSignals(self):
-        self.ui.btnSelectCustomer.clicked.connect(self.selectClient)
+        self.ui.btnSelectClient.clicked.connect(self.selectClient)
         self.ui.btnTableAdd.clicked.connect(self.addTableItem)
         self.ui.btnTableRemove.clicked.connect(self.removeTableItem)
 
@@ -42,7 +42,7 @@ class ApplicationWizard(QWizard):
         result, client = ClientController.choose(self)
         if result == QDialog.Accepted and client:
             self._client = client
-            self.ui.lblCustomer.setText(client.short_name)
+            self.ui.lblClient.setText(client.short_name)
 
     def getApplication(self):
         self._application.date = self.ui.edtDate.date()
@@ -56,6 +56,6 @@ class ApplicationWizard(QWizard):
         self._application = application
         self.ui.edtDate.setDate(application.date)
         self._client = application.client
-        self.ui.lblCustomer.setText(application.client.short_name)
+        self.ui.lblClient.setText(application.client.short_name)
         self.ui.cmbApplicationType.setCurrentIndex(self.ui.cmbApplicationType.model().getIndexById(application.type.id))
         self.ui.tblElevatorsData.model().setApplicationEntries(application.entries)
