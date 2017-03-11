@@ -21,7 +21,8 @@ class ContractForm(QDialog):
         self._contract = Contract()
 
     def setupSignals(self):
-        self.ui.btnSelectClient.clicked.connect(self.selectClient)
+        # self.ui.btnSelectClient.clicked.connect(self.selectClient)
+        pass
 
     def setupUi(self):
         self.ui.wdgPOA.setVisible(False)

@@ -28,3 +28,7 @@ class ContractsTab(QWidget):
     def editContract(self):
         application = self.ui.tableView.currentIndex().internalPointer()
         ContractController.edit(application, self) and self.ui.tableView.model().modelReset.emit()
+
+    def showEvent(self, event):
+        super(ContractsTab, self).showEvent(event)
+        self.ui.tableView.model().modelReset.emit()

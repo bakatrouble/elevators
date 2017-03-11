@@ -39,3 +39,7 @@ class ApplicationsTab(QWidget):
     def editApplication(self):
         application = self.selectedApplication()
         ApplicationController.edit(application, self) and self.ui.tableView.model().modelReset.emit()
+
+    def showEvent(self, event):
+        super(ApplicationsTab, self).showEvent(event)
+        self.ui.tableView.model().modelReset.emit()
