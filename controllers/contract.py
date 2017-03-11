@@ -22,14 +22,15 @@ class ContractController:
             contract = dlg.getContract()
             cls.model.saveItem(contract)
             cls.model.addItem(contract)
+            application.contract = contract
             return True
         return False
 
     @classmethod
-    def edit(cls, application, parent=None):
+    def edit(cls, contract, parent=None):
         from views.contract_form import ContractForm
         dlg = ContractForm(parent)
-        dlg.setContract(application)
+        dlg.setContract(contract)
         result = dlg.exec()
         if result == ContractForm.Accepted:
             contract = dlg.getContract()

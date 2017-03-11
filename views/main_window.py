@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget
 
+from controllers.account import AccountController
 from controllers.application import ApplicationController
 from controllers.contract import ContractController
 from ui.shared.main_window import Ui_MainWindow
@@ -25,6 +26,9 @@ class MainWindow(QMainWindow):
 
         self.ui.btnCreateContract.clicked.connect(self.createContract)
         self.ui.btnEditContract.clicked.connect(self.editContract)
+
+        self.ui.btnCreateAccount.clicked.connect(self.createAccount)
+        self.ui.btnEditAccount.clicked.connect(self.editAccount)
 
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
@@ -56,7 +60,16 @@ class MainWindow(QMainWindow):
             self.ui.lblContractNumber.setText('не создан')
 
     def setupAccount(self):
-        pass
+        if self.currentApplication().account is not None:
+            self.ui.btnEditAccount.setEnabled(True)
+            self.ui.btnCreateAccount.setEnabled(False)
+            # self.ui.btnPrintContract.setEnabled(True)
+            self.ui.lblAccountNumber.setText('№%s' % self.currentApplication().account.number)
+        else:
+            self.ui.btnEditAccount.setEnabled(False)
+            self.ui.btnCreateAccount.setEnabled(True)
+            # self.ui.btnPrintContract.setEnabled(False)
+            self.ui.lblAccountNumber.setText('не создан')
 
     def setupOrder(self):
         pass
@@ -77,5 +90,13 @@ class MainWindow(QMainWindow):
         self.setupContract()
 
     def editContract(self):
-        ContractController.edit(self.currentApplication().contract)
+        ContractController.edit(self.currentApplication().contract, self)
         self.setupContract()
+
+    def createAccount(self):
+        AccountController.create(self.currentApplication(), self)
+        self.setupAccount()
+
+    def editAccount(self):
+        AccountController.edit(self.currentApplication().account, self)
+        self.setupAccount()

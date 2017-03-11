@@ -1,22 +1,14 @@
-from PyQt5.QtCore import QAbstractTableModel, QDate, Qt
+from PyQt5.QtCore import QDate
 
-from models.base_model import BaseModel
-from models.client import ClientModel
+from .base_model import BaseModel
 
 
-class Contract:
+class Account:
     def __init__(self):
         self.id = None
         self.application_id = None
         self.number = ''
         self.date = QDate().currentDate()
-        self.finish_date = QDate().currentDate()
-        self.price = 0.
-        self.terms = ''
-        self.client = None
-        self.poa = False
-        self.poa_number = ''
-        self.poa_date = QDate().currentDate()
 
     @classmethod
     def fromDict(cls, data):
@@ -25,13 +17,6 @@ class Contract:
         obj.application_id = data['application']
         obj.number = data['number']
         obj.date = QDate().fromString(data['date'], 'yyyy-MM-dd')
-        obj.finish_date = QDate().fromString(data['finish_date'], 'yyyy-MM-dd')
-        obj.price = data['price']
-        obj.terms = data['terms']
-        obj.client = ClientModel.getItemById(data['client'])
-        obj.poa = data['poa']
-        obj.poa_number = data['poa_number']
-        obj.poa_date = QDate().fromString(data['poa_date'], 'yyyy-MM-dd')
         return obj
 
     def toDict(self):
@@ -39,20 +24,14 @@ class Contract:
             'id': self.id,
             'application': self.application_id,
             'number': self.number,
-            'date': self.date.toString('yyyy-MM-dd'),
-            'finish_date': self.finish_date.toString('yyyy-MM-dd'),
-            'price': self.price,
-            'terms': self.terms,
-            'poa': self.poa,
-            'poa_number': self.poa_number,
-            'poa_date': self.poa_date.toString('yyyy-MM-dd'),
+            'date': self.date.toString('yyyy-MM-dd')
         }
 
 
-class ContractModel(BaseModel):
+class AccountModel(BaseModel):
     _items = []
-    url = 'api/contracts/'
-    item_class = Contract
+    url = 'api/accounts/'
+    item_class = Account
 
     # @classmethod
     # def data(cls, index, role=None):
@@ -68,7 +47,7 @@ class ContractModel(BaseModel):
     #         elif column == 3:
     #             return cls._items[row].price
     #     return None
-    #
+
     # def columnCount(self, *args, **kwargs):
     #     return 4
     #

@@ -7,6 +7,7 @@ from models.application_type import ApplicationTypeModel
 from models.base_model import BaseModel
 from models.client import ClientModel
 from models.contract import Contract
+from models.account import Account
 from shared.address import Address, AddressDialog
 
 
@@ -179,6 +180,8 @@ class Application:
             obj.entries.append(ApplicationEntry.fromDict(item))
         if data['contract']:
             obj.contract = Contract.fromDict(data['contract'])
+        if data['account']:
+            obj.account = Account.fromDict(data['account'])
         return obj
 
     def toDict(self):

@@ -4,7 +4,6 @@ from models.contract import Contract
 from models.application import Application
 
 from controllers.client import ClientController
-from controllers.contract import ContractController
 from ui.contracts.contract_form import Ui_ContractForm
 
 
