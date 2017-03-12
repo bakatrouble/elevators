@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QMainWindow, QWidget
-from jinja2 import Template
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from jinja2 import Template, exceptions
 
 from controllers.account import AccountController
 from controllers.application import ApplicationController
@@ -73,24 +73,24 @@ class MainWindow(QMainWindow):
         if self.currentApplication().account is not None:
             self.ui.btnEditAccount.setEnabled(True)
             self.ui.btnCreateAccount.setEnabled(False)
-            # self.ui.btnPrintContract.setEnabled(True)
+            self.ui.btnPrintAccount.setEnabled(True)
             self.ui.lblAccountNumber.setText('№%s' % self.currentApplication().account.number)
         else:
             self.ui.btnEditAccount.setEnabled(False)
             self.ui.btnCreateAccount.setEnabled(True)
-            # self.ui.btnPrintContract.setEnabled(False)
+            self.ui.btnPrintAccount.setEnabled(False)
             self.ui.lblAccountNumber.setText('не создан')
 
     def setupOrder(self):
         if self.currentApplication().order is not None:
             self.ui.btnEditOrder.setEnabled(True)
             self.ui.btnCreateOrder.setEnabled(False)
-            # self.ui.btnPrintOrder.setEnabled(True)
+            self.ui.btnPrintOrder.setEnabled(True)
             self.ui.lblOrderNumber.setText('№%s' % self.currentApplication().order.number)
         else:
             self.ui.btnEditOrder.setEnabled(False)
             self.ui.btnCreateOrder.setEnabled(True)
-            # self.ui.btnPrintOrder.setEnabled(False)
+            self.ui.btnPrintOrder.setEnabled(False)
             self.ui.lblOrderNumber.setText('не создан')
 
     def setupProtocols(self):
@@ -105,9 +105,17 @@ class MainWindow(QMainWindow):
         self.ui.tblApplications.model().modelReset.emit()
 
     def printApplication(self):
-        template = Template(self.currentApplication().type.application_template)
-        dlg = PrintDialog(self)
-        dlg.showDialog(template.render(application=self.currentApplication()))
+        try:
+            template = Template(self.currentApplication().type.application_template)
+            dlg = PrintDialog(self)
+            dlg.showDialog(template.render(application=self.currentApplication()))
+        except exceptions.TemplateSyntaxError as e:
+            QMessageBox().warning(self, 'Ошибка',
+                                  'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
+            return
+        except exceptions.TemplateError as e:
+            QMessageBox().warning(self, 'Ошибка', 'Произошла ошибка при печати шаблона:\n%s' % e.message)
+            return
 
     def createContract(self):
         ContractController.create(self.currentApplication(), self)
@@ -118,9 +126,17 @@ class MainWindow(QMainWindow):
         self.setupContract()
 
     def printContract(self):
-        template = Template(self.currentApplication().type.contract_template)
-        dlg = PrintDialog(self)
-        dlg.showDialog(template.render(contract=self.currentApplication().contract))
+        try:
+            template = Template(self.currentApplication().type.contract_template)
+            dlg = PrintDialog(self)
+            dlg.showDialog(template.render(contract=self.currentApplication().contract))
+        except exceptions.TemplateSyntaxError as e:
+            QMessageBox().warning(self, 'Ошибка',
+                                  'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
+            return
+        except exceptions.TemplateError as e:
+            QMessageBox().warning(self, 'Ошибка', 'Произошла ошибка при печати шаблона:\n%s' % e.message)
+            return
 
     def createAccount(self):
         AccountController.create(self.currentApplication(), self)
@@ -131,9 +147,17 @@ class MainWindow(QMainWindow):
         self.setupAccount()
 
     def printAccount(self):
-        template = Template(self.currentApplication().type.account_template)
-        dlg = PrintDialog(self)
-        dlg.showDialog(template.render(account=self.currentApplication().account))
+        try:
+            template = Template(self.currentApplication().type.account_template)
+            dlg = PrintDialog(self)
+            dlg.showDialog(template.render(account=self.currentApplication().account))
+        except exceptions.TemplateSyntaxError as e:
+            QMessageBox().warning(self, 'Ошибка',
+                                  'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
+            return
+        except exceptions.TemplateError as e:
+            QMessageBox().warning(self, 'Ошибка', 'Произошла ошибка при печати шаблона:\n%s' % e.message)
+            return
 
     def createOrder(self):
         OrderController.create(self.currentApplication(), self)
@@ -144,6 +168,14 @@ class MainWindow(QMainWindow):
         self.setupOrder()
 
     def printOrder(self):
-        template = Template(self.currentApplication().type.order_template)
-        dlg = PrintDialog(self)
-        dlg.showDialog(template.render(order=self.currentApplication().order))
+        try:
+            template = Template(self.currentApplication().type.order_template)
+            dlg = PrintDialog(self)
+            dlg.showDialog(template.render(order=self.currentApplication().order))
+        except exceptions.TemplateSyntaxError as e:
+            QMessageBox().warning(self, 'Ошибка',
+                                  'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
+            return
+        except exceptions.TemplateError as e:
+            QMessageBox().warning(self, 'Ошибка', 'Произошла ошибка при печати шаблона:\n%s' % e.message)
+            return
