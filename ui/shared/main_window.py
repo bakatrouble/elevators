@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.8
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -144,37 +144,8 @@ class Ui_MainWindow(object):
         self.btnEditOrder.setObjectName("btnEditOrder")
         self.horizontalLayout_3.addWidget(self.btnEditOrder)
         self.verticalLayout_4.addWidget(self.horizontalWidget_3)
-        self.label_5 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
-        self.label_5.setObjectName("label_5")
-        self.verticalLayout_4.addWidget(self.label_5)
-        self.tblProtocols = QtWidgets.QListView(self.scrollAreaWidgetContents_2)
-        self.tblProtocols.setObjectName("tblProtocols")
-        self.verticalLayout_4.addWidget(self.tblProtocols)
-        self.horizontalWidget_4 = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
-        self.horizontalWidget_4.setObjectName("horizontalWidget_4")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalWidget_4)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem4)
-        self.btnPrintProtocol = QtWidgets.QPushButton(self.horizontalWidget_4)
-        self.btnPrintProtocol.setEnabled(False)
-        self.btnPrintProtocol.setObjectName("btnPrintProtocol")
-        self.horizontalLayout_4.addWidget(self.btnPrintProtocol)
-        self.pushButton_12 = QtWidgets.QPushButton(self.horizontalWidget_4)
-        self.pushButton_12.setEnabled(False)
-        self.pushButton_12.setObjectName("pushButton_12")
-        self.horizontalLayout_4.addWidget(self.pushButton_12)
-        self.btnCreateProtocol = QtWidgets.QPushButton(self.horizontalWidget_4)
-        self.btnCreateProtocol.setObjectName("btnCreateProtocol")
-        self.horizontalLayout_4.addWidget(self.btnCreateProtocol)
-        self.btnEditProtocol = QtWidgets.QPushButton(self.horizontalWidget_4)
-        self.btnEditProtocol.setEnabled(False)
-        self.btnEditProtocol.setObjectName("btnEditProtocol")
-        self.horizontalLayout_4.addWidget(self.btnEditProtocol)
-        self.verticalLayout_4.addWidget(self.horizontalWidget_4)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_4.addItem(spacerItem5)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem4)
         self.pnlDocuments.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.addWidget(self.splitter)
         self.verticalLayout.addWidget(self.widget)
@@ -212,9 +183,4 @@ class Ui_MainWindow(object):
         self.btnPrintOrder.setText(_translate("MainWindow", "Печать"))
         self.btnCreateOrder.setText(_translate("MainWindow", "Создать"))
         self.btnEditOrder.setText(_translate("MainWindow", "Изменить"))
-        self.label_5.setText(_translate("MainWindow", "Протоколы"))
-        self.btnPrintProtocol.setText(_translate("MainWindow", "Печать"))
-        self.pushButton_12.setText(_translate("MainWindow", "Удалить"))
-        self.btnCreateProtocol.setText(_translate("MainWindow", "Создать"))
-        self.btnEditProtocol.setText(_translate("MainWindow", "Изменить"))
 
