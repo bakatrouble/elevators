@@ -3,6 +3,7 @@ from PyQt5.QtCore import QDate
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyledItemDelegate, QLineEdit, QWidget, QSpinBox, QDateEdit
 
+from models.application_type import ApplicationType
 from models.application_type import ApplicationTypeModel
 from models.base_model import BaseModel
 from models.client import ClientModel
@@ -162,7 +163,7 @@ class Application:
     def __init__(self):
         self.id = None
         self.date = QDate().currentDate()
-        self.type = None
+        self.type = None  # type: ApplicationType
         self.client = None
         self.entries = []
 
