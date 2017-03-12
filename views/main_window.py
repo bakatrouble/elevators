@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget
 from controllers.account import AccountController
 from controllers.application import ApplicationController
 from controllers.contract import ContractController
+from controllers.order import OrderController
 from ui.shared.main_window import Ui_MainWindow
 from models.application import ApplicationModel, Application
 
@@ -29,6 +30,9 @@ class MainWindow(QMainWindow):
 
         self.ui.btnCreateAccount.clicked.connect(self.createAccount)
         self.ui.btnEditAccount.clicked.connect(self.editAccount)
+
+        self.ui.btnCreateOrder.clicked.connect(self.createOrder)
+        self.ui.btnEditOrder.clicked.connect(self.editOrder)
 
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
@@ -72,7 +76,16 @@ class MainWindow(QMainWindow):
             self.ui.lblAccountNumber.setText('не создан')
 
     def setupOrder(self):
-        pass
+        if self.currentApplication().order is not None:
+            self.ui.btnEditOrder.setEnabled(True)
+            self.ui.btnCreateOrder.setEnabled(False)
+            # self.ui.btnPrintOrder.setEnabled(True)
+            self.ui.lblOrderNumber.setText('№%s' % self.currentApplication().order.number)
+        else:
+            self.ui.btnEditOrder.setEnabled(False)
+            self.ui.btnCreateOrder.setEnabled(True)
+            # self.ui.btnPrintOrder.setEnabled(False)
+            self.ui.lblOrderNumber.setText('не создан')
 
     def setupProtocols(self):
         pass
@@ -100,3 +113,11 @@ class MainWindow(QMainWindow):
     def editAccount(self):
         AccountController.edit(self.currentApplication().account, self)
         self.setupAccount()
+
+    def createOrder(self):
+        OrderController.create(self.currentApplication(), self)
+        self.setupOrder()
+
+    def editOrder(self):
+        OrderController.edit(self.currentApplication().order, self)
+        self.setupOrder()

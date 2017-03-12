@@ -8,13 +8,15 @@ import utils
 from models.application import ApplicationModel
 from models.application_type import ApplicationTypeModel
 from models.client import ClientModel
-from models.contract import ContractModel
+from models.specialist import SpecialistModel
 from views.main_window import MainWindow
 
 
 def loadModels():
     ApplicationTypeModel.loadData()
     ClientModel.loadData()
+    SpecialistModel.loadData()
+
     ApplicationModel.loadData()
 
 if __name__ == '__main__':

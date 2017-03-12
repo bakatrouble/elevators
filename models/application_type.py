@@ -25,15 +25,15 @@ class ApplicationType:
         obj.order_template = data['order_template']
         return obj
     
-    def toDict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'hints': self.hints,
-            'application_template': self.application_template,
-            'contract_template': self.contract_template,
-            'order_template': self.order_template,
-        }
+    # def toDict(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'hints': self.hints,
+    #         'application_template': self.application_template,
+    #         'contract_template': self.contract_template,
+    #         'order_template': self.order_template,
+    #     }
 
 
 class ApplicationTypeModel(QStringListModel, BaseModel):
@@ -42,7 +42,7 @@ class ApplicationTypeModel(QStringListModel, BaseModel):
     item_class = ApplicationType
 
     @classmethod
-    def data(cls, index, role):
+    def data(cls, index, role=None):
         if role == Qt.DisplayRole:
             row = index.row()
             return cls._items[row].name

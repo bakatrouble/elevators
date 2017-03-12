@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 from models.client import ClientModel
 from models.contract import Contract
 from models.account import Account
+from models.order import Order
 from models.address import Address
 from views.address import AddressDialog
 
@@ -183,6 +184,8 @@ class Application:
             obj.contract = Contract.fromDict(data['contract'])
         if data['account']:
             obj.account = Account.fromDict(data['account'])
+        if data['order']:
+            obj.order = Order.fromDict(data['order'])
         return obj
 
     def toDict(self):

@@ -11,8 +11,8 @@ class BaseModel(QAbstractItemModel):
 
     def __init__(self):
         super(BaseModel, self).__init__()
-        if not self._items:
-            self.loadData()
+        if not self.__class__._items:
+            self.__class__.loadData()
 
     @classmethod
     def loadData(cls):
