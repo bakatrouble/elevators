@@ -194,7 +194,7 @@ class Application:
             'id': self.id,
             'date': self.date.toString('yyyy-MM-dd'),
             'type': self.type.id,
-            'client': self.client.id,
+            'client': self.client.id if self.client else Client(),
             'entries': [entry.toDict() for entry in self.entries]
         }
 

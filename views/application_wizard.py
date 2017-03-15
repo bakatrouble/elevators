@@ -2,9 +2,10 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
 
 from models.application import Application, DataTableModel, DataTableDelegate
+from models.client import Client
+from models.application_type import ApplicationTypeModel
 
 from controllers.client import ClientController
-from models.application_type import ApplicationTypeModel
 from ui.applications.application_wizard import Ui_ApplicationWizard
 
 
@@ -46,6 +47,9 @@ class ApplicationWizard(QWizard):
 
     def getApplication(self):
         self._application.date = self.ui.edtDate.date()
+        if not self._client:
+            self._client = Client()
+            self._client.short_name = '<без названия>'
         self._application.client = self._client
         typeIndex = self.ui.cmbApplicationType.currentIndex()
         self._application.type = self.ui.cmbApplicationType.model().item(typeIndex)
