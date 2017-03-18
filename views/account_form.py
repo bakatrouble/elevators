@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 
-from models.account import Account
-from models.application import Application
+from models.items.account import Account
+from models.items.application import Application
 
 from ui.accounts.account_form import Ui_AccountForm
 

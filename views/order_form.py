@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 
-from models.order import Order
-from models.application import Application
+from models.items.order import Order
+from models.items.application import Application
 from models.specialist import SpecialistListModel, SpecialistItemDelegate, SpecialistModel
 
 from ui.orders.order_form import Ui_OrderForm

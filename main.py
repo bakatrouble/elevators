@@ -1,31 +1,26 @@
 #!/usr/bin/env python3
 import sys
-
 from PyQt5.QtCore import QLocale
 from PyQt5.QtWidgets import QApplication
 
-import utils
-from models.application import ApplicationModel
-from models.application_type import ApplicationTypeModel
-from models.client import ClientModel
-from models.specialist import SpecialistModel
+from utils import excepthook, Options, die
 from views.main_window import MainWindow
-
-
-def loadModels():
-    ApplicationTypeModel.loadData()
-    ClientModel.loadData()
-    SpecialistModel.loadData()
-
-    ApplicationModel.loadData()
+from views.login_form import LoginForm
 
 if __name__ == '__main__':
     # setting exception hook for pycharm
-    sys.excepthook = utils.excepthook
+    sys.excepthook = excepthook
 
     app = QApplication(sys.argv)
-    loadModels()
     QLocale().setDefault(QLocale(QLocale.Russian, QLocale.RussianFederation))
+
+    login_form = LoginForm()
+    if login_form.exec() != LoginForm.Accepted:
+        die()
+
     window = MainWindow()
     window.show()
-    sys.exit(app.exec())
+    app.exec()
+
+    Options.dump()
+    die()

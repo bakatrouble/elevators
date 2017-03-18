@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QDialog
 
-from models.client import Client
+from models.items.client import Client
 from ui.shared.client_form import Ui_CustomerForm
 
 

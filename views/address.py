@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QDialog
 
-from models.address import Address
+from models.items.address import Address
 from ui.shared.address import Ui_AddressDialog
 
 

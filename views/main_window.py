@@ -1,12 +1,13 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from jinja2 import Template, exceptions
+import sys
 
 from controllers.account import AccountController
-from controllers.application import ApplicationController
 from controllers.contract import ContractController
 from controllers.order import OrderController
 from ui.shared.main_window import Ui_MainWindow
-from models.application import ApplicationModel, Application
+from models import Models
+from utils import Options
 from views.print_dialog import PrintDialog
 
 
@@ -20,7 +21,7 @@ class MainWindow(QMainWindow):
         self.setupSignals()
 
     def setupUi(self):
-        self.ui.tblApplications.setModel(ApplicationModel())
+        self.ui.tblApplications.setModel(Models.get().applications)
 
     def setupSignals(self):
         self.ui.tblApplications.selectionModel().selectionChanged.connect(self.tblApplicationsSelectionChanged)
@@ -40,10 +41,12 @@ class MainWindow(QMainWindow):
         self.ui.btnEditOrder.clicked.connect(self.editOrder)
         self.ui.btnPrintOrder.clicked.connect(self.printOrder)
 
+        self.ui.actExit.triggered.connect(sys.exit)
+
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
-            self.ui.btnEditApplication.setEnabled(True)
-            self.ui.pnlDocuments.setEnabled(True)
+            self.ui.btnEditApplication.setEnabled(not Options.get().autonomy_mode)
+            self.ui.pnlDocuments.setEnabled(bool(self.currentApplication().id))
             self.ui.btnPrintApplication.setEnabled(True)
             self.setupContract()
             self.setupAccount()
@@ -54,7 +57,7 @@ class MainWindow(QMainWindow):
             self.ui.pnlDocuments.setEnabled(False)
             self.ui.btnPrintApplication.setEnabled(False)
 
-    def currentApplication(self) -> Application:
+    def currentApplication(self):
         return self.ui.tblApplications.currentIndex().internalPointer()
 
     def setupContract(self):
@@ -97,12 +100,10 @@ class MainWindow(QMainWindow):
         pass
 
     def createApplication(self):
-        ApplicationController.create(self)
-        self.ui.tblApplications.model().modelReset.emit()
+        Models.get().applications.createApplication(self)
 
     def editApplication(self):
-        ApplicationController.edit(self.currentApplication(), self)
-        self.ui.tblApplications.model().modelReset.emit()
+        Models.get().applications.editApplication(self.ui.tblApplications.currentIndex(), self)
 
     def printApplication(self):
         try:

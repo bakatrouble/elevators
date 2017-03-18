@@ -20,7 +20,13 @@ class AccountController:
         result = dlg.exec()
         if result == AccountForm.Accepted:
             account = dlg.getAccount()
-            cls.model.saveItem(account)
+            while not cls.model.saveItem(account):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             application.account = account
             return True
         return False
@@ -33,6 +39,12 @@ class AccountController:
         result = dlg.exec()
         if result == AccountForm.Accepted:
             account = dlg.getAccount()
-            cls.model.saveItem(account)
+            while not cls.model.saveItem(account):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             return True
         return False

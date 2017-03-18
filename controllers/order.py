@@ -12,7 +12,13 @@ class OrderController:
         result = dlg.exec()
         if result == OrderForm.Accepted:
             order = dlg.getOrder()
-            cls.model.saveItem(order)
+            while not cls.model.saveItem(order):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             application.contract = order
             return True
         return False
@@ -25,6 +31,12 @@ class OrderController:
         result = dlg.exec()
         if result == OrderForm.Accepted:
             order = dlg.getOrder()
-            cls.model.saveItem(order)
+            while not cls.model.saveItem(order):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             return True
         return False

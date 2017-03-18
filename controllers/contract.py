@@ -20,8 +20,13 @@ class ContractController:
         result = dlg.exec()
         if result == ContractForm.Accepted:
             contract = dlg.getContract()
-            cls.model.saveItem(contract)
-            cls.model.addItem(contract)
+            while not cls.model.saveItem(contract):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             application.contract = contract
             return True
         return False
@@ -34,6 +39,12 @@ class ContractController:
         result = dlg.exec()
         if result == ContractForm.Accepted:
             contract = dlg.getContract()
-            cls.model.saveItem(contract)
+            while not cls.model.saveItem(contract):
+                p = QMessageBox().warning(parent, 'Ошибка',
+                                          'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                          'закрыта, а несохраненные изменения потеряны.',
+                                          QMessageBox.Retry | QMessageBox.Cancel)
+                if p != QMessageBox.Retry:
+                    die()
             return True
         return False

@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
 
-from models.application import Application, DataTableModel, DataTableDelegate
-from models.client import Client
-from models.application_type import ApplicationTypeModel
+from models.application_internals import DataTableModel, DataTableDelegate
+from models.items.application import Application
+from models.items.client import Client
+from models import Models
 
 from controllers.client import ClientController
 from ui.applications.application_wizard import Ui_ApplicationWizard
@@ -28,7 +29,7 @@ class ApplicationWizard(QWizard):
 
     def setupUi(self):
         self.ui.tblElevatorsData.horizontalHeader().setVisible(True)
-        self.ui.cmbApplicationType.setModel(ApplicationTypeModel())
+        self.ui.cmbApplicationType.setModel(Models.get().application_types)
         self.ui.tblElevatorsData.setModel(DataTableModel())
         self.ui.tblElevatorsData.setItemDelegate(DataTableDelegate())
 

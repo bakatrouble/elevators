@@ -1,4 +1,5 @@
 from models.client import ClientModel
+from utils import Options
 
 
 class ClientController:
@@ -20,7 +21,14 @@ class ClientController:
         result = dlg.exec()
         if result == ClientForm.Accepted:
             client = dlg.getClient()
-            cls.model.saveItem(client)
+            if not Options.get().autonomy_mode:
+                while not cls.model.saveItem(client):
+                    p = QMessageBox().warning(parent, 'Ошибка',
+                                              'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                              'закрыта, а несохраненные изменения потеряны.',
+                                              QMessageBox.Retry | QMessageBox.Cancel)
+                    if p != QMessageBox.Retry:
+                        die()
             cls.model.addItem(client)
             return True
         return False
@@ -33,6 +41,13 @@ class ClientController:
         result = dlg.exec()
         if result == ClientForm.Accepted:
             client = dlg.getClient()
-            cls.model.saveItem(client)
+            if not Options.get().autonomy_mode:
+                while not cls.model.saveItem(client):
+                    p = QMessageBox().warning(parent, 'Ошибка',
+                                              'Потеряно соединение с сервером. Повторить?\nПри отмене программа будет '
+                                              'закрыта, а несохраненные изменения потеряны.',
+                                              QMessageBox.Retry | QMessageBox.Cancel)
+                    if p != QMessageBox.Retry:
+                        die()
             return True
         return False

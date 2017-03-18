@@ -1,7 +1,9 @@
 import json
-
 import requests
+import requests.exceptions
 from PyQt5.QtCore import QAbstractItemModel, QModelIndex
+
+from utils import Options
 
 
 class BaseModel(QAbstractItemModel):
@@ -11,24 +13,26 @@ class BaseModel(QAbstractItemModel):
 
     def __init__(self):
         super(BaseModel, self).__init__()
-        if not self.__class__._items:
-            self.__class__.loadData()
 
     @classmethod
     def loadData(cls):
-        data = requests.get('http://127.0.0.1:8000/' + cls.url).json()
+        data = requests.get('http://' + Options.get().server_url + '/' + cls.url).json()
         cls._items = []
         for item in data:
             cls._items.append(cls.item_class.fromDict(item))
 
     @classmethod
     def saveItem(cls, item):
-        print(json.dumps(item.toDict()))
-        if item.id is None:
-            data = requests.post('http://127.0.0.1:8000/' + cls.url, json=item.toDict()).json()
-            item.id = data['id']
-        else:
-            requests.put('http://127.0.0.1:8000/' + cls.url + str(item.id) + '/', json=item.toDict())
+        try:
+            print(json.dumps(item.toDict()))
+            if item.id is None:
+                data = requests.post('http://' + Options.get().server_url + '/' + cls.url, json=item.toDict()).json()
+                item.id = data['id']
+            else:
+                requests.put('http://' + Options.get().server_url + '/' + cls.url + str(item.id) + '/', json=item.toDict())
+            return True
+        except requests.exceptions.ConnectionError:
+            return False
 
     @classmethod
     def data(cls, index, role=None):
@@ -66,3 +70,11 @@ class BaseModel(QAbstractItemModel):
     @classmethod
     def item(cls, index):
         return cls._items[index]
+
+    @classmethod
+    def items(cls):
+        return cls._items
+
+    @classmethod
+    def setItems(cls, items):
+        cls._items = items

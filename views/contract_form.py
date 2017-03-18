@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 
-from models.contract import Contract
-from models.application import Application
+from models.items.contract import Contract
+from models.items.application import Application
 
 from controllers.client import ClientController
 from ui.contracts.contract_form import Ui_ContractForm
