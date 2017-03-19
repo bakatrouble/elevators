@@ -19,7 +19,7 @@ class OrderController:
                                           QMessageBox.Retry | QMessageBox.Cancel)
                 if p != QMessageBox.Retry:
                     die()
-            application.contract = order
+            application.order = order
             return True
         return False
 

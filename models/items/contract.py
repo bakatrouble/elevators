@@ -13,9 +13,12 @@ class Contract:
         self.price = 0.
         self.terms = ''
         self.client = None
-        self.poa = False
-        self.poa_number = ''
-        self.poa_date = QDate().currentDate()
+        self.poa_client = False
+        self.poa_client_number = ''
+        self.poa_client_date = QDate().currentDate()
+        self.poa_contractor = False
+        self.poa_contractor_number = ''
+        self.poa_contractor_date = QDate().currentDate()
 
     @classmethod
     def fromDict(cls, data):
@@ -28,9 +31,12 @@ class Contract:
         obj.price = data['price']
         obj.terms = data['terms']
         obj.client = ClientModel.getItemById(data['client'])
-        obj.poa = data['poa']
-        obj.poa_number = data['poa_number']
-        obj.poa_date = QDate().fromString(data['poa_date'], 'yyyy-MM-dd')
+        obj.poa = data['poa_client']
+        obj.poa_number = data['poa_client_number']
+        obj.poa_date = QDate().fromString(data['poa_client_date'], 'yyyy-MM-dd')
+        obj.poa = data['poa_contractor']
+        obj.poa_number = data['poa_contractor_number']
+        obj.poa_date = QDate().fromString(data['poa_contractor_date'], 'yyyy-MM-dd')
         return obj
 
     def toDict(self):
@@ -42,7 +48,10 @@ class Contract:
             'finish_date': self.finish_date.toString('yyyy-MM-dd'),
             'price': self.price,
             'terms': self.terms,
-            'poa': self.poa,
-            'poa_number': self.poa_number,
-            'poa_date': self.poa_date.toString('yyyy-MM-dd'),
+            'poa_client': self.poa_client,
+            'poa_client_number': self.poa_client_number,
+            'poa_client_date': self.poa_client_date.toString('yyyy-MM-dd'),
+            'poa_contractor': self.poa_contractor,
+            'poa_contractor_number': self.poa_contractor_number,
+            'poa_contractor_date': self.poa_contractor_date.toString('yyyy-MM-dd'),
         }

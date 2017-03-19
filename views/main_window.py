@@ -7,7 +7,7 @@ from controllers.contract import ContractController
 from controllers.order import OrderController
 from ui.shared.main_window import Ui_MainWindow
 from models import Models
-from utils import Options
+from utils import Options, die
 from views.print_dialog import PrintDialog
 
 
@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         self.ui.btnEditOrder.clicked.connect(self.editOrder)
         self.ui.btnPrintOrder.clicked.connect(self.printOrder)
 
-        self.ui.actExit.triggered.connect(sys.exit)
+        self.ui.actExit.triggered.connect(die)
 
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
@@ -61,38 +61,44 @@ class MainWindow(QMainWindow):
         return self.ui.tblApplications.currentIndex().internalPointer()
 
     def setupContract(self):
+        has_perms = Options.get().group in ('supervisor', 'accounting')
         if self.currentApplication().contract is not None:
-            self.ui.btnEditContract.setEnabled(True)
+            self.ui.btnEditContract.setEnabled(has_perms)
             self.ui.btnCreateContract.setEnabled(False)
             self.ui.btnPrintContract.setEnabled(True)
             self.ui.lblContractNumber.setText('№%s' % self.currentApplication().contract.number)
         else:
             self.ui.btnEditContract.setEnabled(False)
-            self.ui.btnCreateContract.setEnabled(True)
+            self.ui.btnCreateContract.setEnabled(has_perms)
             self.ui.btnPrintContract.setEnabled(False)
             self.ui.lblContractNumber.setText('не создан')
 
     def setupAccount(self):
+        has_perms = self.currentApplication().contract is not None and \
+                    Options.get().group in ('supervisor', 'accounting')
         if self.currentApplication().account is not None:
-            self.ui.btnEditAccount.setEnabled(True)
+            self.ui.btnEditAccount.setEnabled(has_perms)
             self.ui.btnCreateAccount.setEnabled(False)
             self.ui.btnPrintAccount.setEnabled(True)
             self.ui.lblAccountNumber.setText('№%s' % self.currentApplication().account.number)
         else:
             self.ui.btnEditAccount.setEnabled(False)
-            self.ui.btnCreateAccount.setEnabled(True)
+            self.ui.btnCreateAccount.setEnabled(has_perms)
             self.ui.btnPrintAccount.setEnabled(False)
             self.ui.lblAccountNumber.setText('не создан')
 
     def setupOrder(self):
+        has_perms = self.currentApplication().contract is not None and \
+                    self.currentApplication().account is not None and \
+                    Options.get().group in ('supervisor', 'secretary', 'testing')
         if self.currentApplication().order is not None:
-            self.ui.btnEditOrder.setEnabled(True)
+            self.ui.btnEditOrder.setEnabled(has_perms)
             self.ui.btnCreateOrder.setEnabled(False)
             self.ui.btnPrintOrder.setEnabled(True)
             self.ui.lblOrderNumber.setText('№%s' % self.currentApplication().order.number)
         else:
             self.ui.btnEditOrder.setEnabled(False)
-            self.ui.btnCreateOrder.setEnabled(True)
+            self.ui.btnCreateOrder.setEnabled(has_perms)
             self.ui.btnPrintOrder.setEnabled(False)
             self.ui.lblOrderNumber.setText('не создан')
 
@@ -130,7 +136,10 @@ class MainWindow(QMainWindow):
         try:
             template = Template(self.currentApplication().type.contract_template)
             dlg = PrintDialog(self)
-            dlg.showDialog(template.render(contract=self.currentApplication().contract))
+            dlg.showDialog(template.render(
+                application=self.currentApplication(),
+                contract=self.currentApplication().contract
+            ))
         except exceptions.TemplateSyntaxError as e:
             QMessageBox().warning(self, 'Ошибка',
                                   'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
@@ -151,7 +160,11 @@ class MainWindow(QMainWindow):
         try:
             template = Template(self.currentApplication().type.account_template)
             dlg = PrintDialog(self)
-            dlg.showDialog(template.render(account=self.currentApplication().account))
+            dlg.showDialog(template.render(
+                application=self.currentApplication(),
+                contract=self.currentApplication().contract,
+                account=self.currentApplication().account
+            ))
         except exceptions.TemplateSyntaxError as e:
             QMessageBox().warning(self, 'Ошибка',
                                   'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))
@@ -172,7 +185,12 @@ class MainWindow(QMainWindow):
         try:
             template = Template(self.currentApplication().type.order_template)
             dlg = PrintDialog(self)
-            dlg.showDialog(template.render(order=self.currentApplication().order))
+            dlg.showDialog(template.render(
+                application=self.currentApplication(),
+                contract=self.currentApplication().contract,
+                account=self.currentApplication().account,
+                order=self.currentApplication().order
+            ))
         except exceptions.TemplateSyntaxError as e:
             QMessageBox().warning(self, 'Ошибка',
                                   'Произошла ошибка при печати шаблона:\n%s\n(Строка %s)' % (e.message, e.lineno))

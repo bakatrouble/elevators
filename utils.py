@@ -20,6 +20,7 @@ class OptionsStructure:
 
         self.username = ''
         self.token = ''
+        self.group = ''
 
         self.cache_application_types = []
         self.cache_clients = []
@@ -42,6 +43,7 @@ class Options:
 
         cls.instance.autonomy_available = True
         cls.instance.autonomy_mode = False
+        cls.instance.token = ''
 
         with open(os.path.join(os.path.expanduser('~'), '.elevators.sav'), 'wb') as f:
             pickle.dump(cls.instance, f)

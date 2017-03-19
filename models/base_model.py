@@ -16,20 +16,27 @@ class BaseModel(QAbstractItemModel):
 
     @classmethod
     def loadData(cls):
-        data = requests.get('http://' + Options.get().server_url + '/' + cls.url).json()
+        headers = {'Authorization': 'Token ' + Options.get().token}
+        data = requests.get('http://' + Options.get().server_url + '/' + cls.url,
+                            headers=headers).json()
         cls._items = []
         for item in data:
             cls._items.append(cls.item_class.fromDict(item))
 
     @classmethod
     def saveItem(cls, item):
+        headers = {'Authorization': 'Token ' + Options.get().token}
         try:
             print(json.dumps(item.toDict()))
             if item.id is None:
-                data = requests.post('http://' + Options.get().server_url + '/' + cls.url, json=item.toDict()).json()
+                data = requests.post('http://' + Options.get().server_url + '/' + cls.url,
+                                     json=item.toDict(),
+                                     headers=headers).json()
                 item.id = data['id']
             else:
-                requests.put('http://' + Options.get().server_url + '/' + cls.url + str(item.id) + '/', json=item.toDict())
+                requests.put('http://' + Options.get().server_url + '/' + cls.url + str(item.id) + '/',
+                             json=item.toDict(),
+                             headers=headers)
             return True
         except requests.exceptions.ConnectionError:
             return False

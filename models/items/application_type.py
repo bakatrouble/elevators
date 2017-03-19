@@ -2,7 +2,7 @@ class ApplicationType:
     def __init__(self):
         self.id = None
         self.name = ''
-        self.hints = ''
+        # self.hints = ''
         self.application_template = ''
         self.contract_template = ''
         self.account_template = ''
@@ -15,7 +15,7 @@ class ApplicationType:
         obj = cls()
         obj.id = data['id']
         obj.name = data['name']
-        obj.hints = data['hints']
+        # obj.hints = data['hints']
         obj.application_template = data['application_template']
         obj.contract_template = data['contract_template']
         obj.account_template = data['account_template']

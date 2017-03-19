@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QDialog
 
 from models.items.contract import Contract
@@ -24,7 +25,10 @@ class ContractForm(QDialog):
         pass
 
     def setupUi(self):
-        self.ui.wdgPOA.setVisible(False)
+        self.ui.edtContractDate.setDate(QDate().currentDate())
+        self.ui.edtContractFinishDate.setDate(QDate().currentDate())
+        self.ui.edtPOAClientDate.setDate(QDate().currentDate())
+        self.ui.edtPOAContractorDate.setDate(QDate().currentDate())
 
     def selectClient(self):
         result, client = ClientController.choose(self)
@@ -44,10 +48,14 @@ class ContractForm(QDialog):
         self._contract.price = self.ui.edtPrice.value()
         self._contract.terms = self.ui.edtPaymentTerms.toHtml()
         self._contract.client = self._client
-        self._contract.poa = self.ui.chkPOA.isChecked()
-        if self.ui.chkPOA.isChecked():
-            self._contract.poa_number = self.ui.edtPOANumber.text()
-            self._contract.poa_date = self.ui.edtPOADate.date()
+        self._contract.poa_client = self.ui.chkPOAClient.isChecked()
+        if self.ui.chkPOAClient.isChecked():
+            self._contract.poa_client_number = self.ui.edtPOAClientNumber.text()
+            self._contract.poa_client_date = self.ui.edtPOAClientDate.date()
+        self._contract.poa_contractor = self.ui.chkPOAContractor.isChecked()
+        if self.ui.chkPOAContractor.isChecked():
+            self._contract.poa_contractor_number = self.ui.edtPOAContractorNumber.text()
+            self._contract.poa_contractor_date = self.ui.edtPOAContractorDate.date()
         return self._contract
 
     def setContract(self, contract: Contract):
@@ -59,7 +67,11 @@ class ContractForm(QDialog):
         self.ui.edtPrice.setValue(contract.price)
         self.ui.edtPaymentTerms.setHtml(contract.terms)
         self.ui.lblClient.setText(contract.client.short_name)
-        self.ui.chkPOA.setChecked(contract.poa)
-        if contract.poa:
-            self.ui.edtPOANumber.setText(contract.poa_number)
-            self.ui.edtPOADate.setDate(contract.poa_date)
+        self.ui.chkPOAClient.setChecked(contract.poa_client)
+        if contract.poa_client:
+            self.ui.edtPOAClientNumber.setText(contract.poa_client_number)
+            self.ui.edtPOAClientDate.setDate(contract.poa_client_date)
+        self.ui.chkPOAContractor.setChecked(contract.poa_contractor)
+        if contract.poa_contractor:
+            self.ui.edtPOAContractorNumber.setText(contract.poa_contractor_number)
+            self.ui.edtPOAContractorDate.setDate(contract.poa_contractor_date)

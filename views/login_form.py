@@ -4,6 +4,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtCore import QThread
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QMessageBox
+import requests
 import requests.exceptions
 
 from ui.shared.login_form import Ui_LoginForm
@@ -16,8 +17,29 @@ class Worker(QObject):
     result = pyqtSignal(bool)
     progress = pyqtSignal(str)
 
+    def __init__(self, username, password):
+        super(Worker, self).__init__()
+        self.username = username
+        self.password = password
+
+    def checkAuth(self):
+        data = requests.post('http://' + Options.get().server_url + '/api/auth/', json={
+            'username': self.username, 'password': self.password
+        }).json()
+        if data['status'] != 'success':
+            return False
+        Options.get().token = data['token']
+        Options.get().group = data['user']['group']
+        return True
+
     def process(self):
         try:
+            self.progress.emit('Проверка имени пользователя и пароля')
+            if not self.checkAuth():
+                self.progress.emit('<font color=red>Неверное имя пользователя и/или пароль</font>')
+                self.finished.emit()
+                return
+
             self.progress.emit('Синхронизация локального хранилища с сервером...')
             for client in Options.get().local_clients:
                 Models.get().clients.saveItem(client)
@@ -64,15 +86,20 @@ class LoginForm(QDialog):
     def login(self):
         Options.get().username = self.ui.edtUsername.text()
         Options.get().server_url = self.ui.edtServerAddress.text()
+
+        self.ui.btnAutonomyMode.setEnabled(False)
+        self.ui.btnLogin.setEnabled(False)
+
         self.loadModels()
 
     def loadModels(self):
         self.thread = QThread()
-        self.worker = Worker()
+        self.worker = Worker(self.ui.edtUsername.text(), self.ui.edtPassword.text())
         self.worker.moveToThread(self.thread)
         self.thread.started.connect(self.worker.process)
         self.worker.result.connect(self.loadModelsFinished)
         self.worker.progress.connect(self.loadModelsProgress)
+        self.worker.finished.connect(self.reset)
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.worker.finished.connect(self.thread.deleteLater)
@@ -91,12 +118,14 @@ class LoginForm(QDialog):
                     self.autonomy_mode()
                     return
             else:
-                QMessageBox().warning(None, 'Ошибка',
-                                      'Произошла ошибка при соединении с сервером, автономный режим недоступен. '
-                                      'Программа будет завершена.', QMessageBox.Ok)
-            die()
+                QMessageBox().warning(None, 'Ошибка', 'Произошла ошибка при соединении с сервером.', QMessageBox.Ok)
+            self.reset()
         else:
             self.accept()
+
+    def reset(self):
+        self.ui.btnAutonomyMode.setEnabled(True)
+        self.ui.btnLogin.setEnabled(True)
 
     def autonomy_mode(self):
         Options.get().autonomy_mode = True

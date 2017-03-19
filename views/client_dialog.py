@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QDialogButtonBox
 from controllers.client import ClientController
 from models.client import ClientModel
 from ui.shared.client_dialog import Ui_ClientDialog
-from views.client_form import ClientForm
+from utils import Options
 
 
 class ClientDialog(QDialog):
@@ -32,7 +32,7 @@ class ClientDialog(QDialog):
     def selectionChanged(self, index):
         self._result = index.internalPointer().id
         self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
-        self.ui.btnEdit.setEnabled(True)
+        self.ui.btnEdit.setEnabled(Options.get().autonomy_mode)
 
     def getResult(self):
         return self._result

@@ -29,14 +29,17 @@ class ApplicationModel(QStringListModel):
         return self.createIndex(row, column, self._items[row])
 
     def fetchMore(self, index):
+        headers = {'Authorization': 'Token ' + Options.get().token}
         try:
             if not self._next:
-                data = requests.get('http://' + Options.get().server_url + '/api/applications/').json()
+                data = requests.get('http://' + Options.get().server_url + '/api/applications/',
+                                    headers=headers).json()
             else:
                 data = requests.get(self._next).json()
         except requests.exceptions.ConnectionError:
             QMessageBox().warning(None, 'Ошибка', 'Соединение с сервером потеряно. Программа будет закрыта.')
             die()
+            return
         self.beginInsertRows(QModelIndex(), len(self._items), len(self._items) + len(data['results']))
         for item in data['results']:
             self._items.append(Application.fromDict(item))
@@ -60,12 +63,17 @@ class ApplicationModel(QStringListModel):
         return 1
 
     def saveItem(self, item):
+        headers = {'Authorization': 'Token ' + Options.get().token}
         try:
             if item.id is None:
-                data = requests.post('http://' + Options.get().server_url + '/api/applications/', json=item.toDict()).json()
+                data = requests.post('http://' + Options.get().server_url + '/api/applications/',
+                                     json=item.toDict(),
+                                     headers=headers).json()
                 item.id = data['id']
             else:
-                requests.put('http://' + Options.get().server_url + '/api/applications/' + str(item.id) + '/', json=item.toDict())
+                requests.put('http://' + Options.get().server_url + '/api/applications/' + str(item.id) + '/',
+                             json=item.toDict(),
+                             headers=headers)
             return True
         except requests.exceptions.ConnectionError:
             return False
@@ -113,3 +121,6 @@ class ApplicationModel(QStringListModel):
 
     def items(self):
         return self._items
+
+    def flags(self, index):
+        return super(ApplicationModel, self).flags(index) & ~Qt.ItemIsEditable

@@ -142,19 +142,28 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="chkPOA">
-         <property name="text">
-          <string>По доверенности</string>
+        <widget class="QGroupBox" name="chkPOAClient">
+         <property name="title">
+          <string>По доверенности (заказчик)</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="wdgPOA" native="true">
-         <layout class="QGridLayout" name="gridLayout">
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="1">
            <widget class="QLabel" name="label_9">
             <property name="text">
              <string>Дата доверенности</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDateEdit" name="edtPOAClientDate">
+            <property name="calendarPopup">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -165,11 +174,43 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <widget class="QLineEdit" name="edtPOAClientNumber"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="chkPOAContractor">
+         <property name="title">
+          <string>По доверенности (исполнитель)</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>№ доверенности</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Дата доверенности</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
-           <widget class="QLineEdit" name="edtPOANumber"/>
+           <widget class="QLineEdit" name="edtPOAContractorNumber"/>
           </item>
           <item row="1" column="1">
-           <widget class="QDateEdit" name="edtPOADate">
+           <widget class="QDateEdit" name="edtPOAContractorDate">
             <property name="calendarPopup">
              <bool>true</bool>
             </property>
@@ -238,22 +279,6 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>chkPOA</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>wdgPOA</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>563</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>125</x>
-     <y>576</y>
     </hint>
    </hints>
   </connection>
