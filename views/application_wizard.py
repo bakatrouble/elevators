@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QWizard
 
@@ -28,6 +29,8 @@ class ApplicationWizard(QWizard):
         self.ui.btnTableRemove.clicked.connect(self.removeTableItem)
 
     def setupUi(self):
+        self.ui.edtDate.setDate(QDate().currentDate())
+
         self.ui.tblElevatorsData.horizontalHeader().setVisible(True)
         self.ui.cmbApplicationType.setModel(Models.get().application_types)
         self.ui.tblElevatorsData.setModel(DataTableModel())

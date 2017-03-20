@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'address.ui'
 #
-# Created by: PyQt5 UI code generator 5.7.1
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_AddressDialog(object):
     def setupUi(self, AddressDialog):
         AddressDialog.setObjectName("AddressDialog")
-        AddressDialog.resize(400, 302)
+        AddressDialog.resize(400, 334)
         self.verticalLayout = QtWidgets.QVBoxLayout(AddressDialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(AddressDialog)
@@ -72,7 +72,7 @@ class Ui_AddressDialog(object):
 
     def retranslateUi(self, AddressDialog):
         _translate = QtCore.QCoreApplication.translate
-        AddressDialog.setWindowTitle(_translate("AddressDialog", "Dialog"))
+        AddressDialog.setWindowTitle(_translate("AddressDialog", "Адрес"))
         self.label.setText(_translate("AddressDialog", "Область"))
         self.label_2.setText(_translate("AddressDialog", "Район"))
         self.label_3.setText(_translate("AddressDialog", "Населенный пункт"))

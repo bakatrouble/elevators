@@ -27,7 +27,6 @@ class BaseModel(QAbstractItemModel):
     def saveItem(cls, item):
         headers = {'Authorization': 'Token ' + Options.get().token}
         try:
-            print(json.dumps(item.toDict()))
             if item.id is None:
                 data = requests.post('http://' + Options.get().server_url + '/' + cls.url,
                                      json=item.toDict(),

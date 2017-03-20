@@ -12,6 +12,8 @@ class Order:
         self.to_date = QDate().currentDate()
         self.act_date = QDate().currentDate()
         self.controller = ''
+        self.manager = ''
+        self.expert = ''
         self.head_specialist = None
         self.specialists = []
 
@@ -25,6 +27,8 @@ class Order:
         obj.to_date = QDate().fromString(data['to_date'], 'yyyy-MM-dd')
         obj.act_date = QDate().fromString(data['act_date'], 'yyyy-MM-dd')
         obj.controller = data['controller']
+        obj.manager = data['manager']
+        obj.expert = data['expert']
         obj.head_specialist = SpecialistModel.getItemById(data['head_specialist'])
         obj.specialists = [SpecialistModel.getItemById(spec_id) for spec_id in data['specialists']]
         return obj
@@ -38,6 +42,8 @@ class Order:
             'to_date': self.to_date.toString('yyyy-MM-dd'),
             'act_date': self.act_date.toString('yyyy-MM-dd'),
             'controller': self.controller,
+            'manager': self.manager,
+            'expert': self.expert,
             'head_specialist': self.head_specialist.id if self.head_specialist else None,
             'specialists': [spec.id for spec in self.specialists]
         }

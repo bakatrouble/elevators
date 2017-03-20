@@ -22,7 +22,6 @@ class PrintDialog(QDialog):
         self.ui.btnPrint.clicked.connect(self.doPrint)
 
     def showDialog(self, html):
-        print(html)
         self._html = html
         self.ui.textBrowser.setHtml(html)
         self.exec()

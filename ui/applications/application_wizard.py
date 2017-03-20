@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'application_wizard.ui'
 #
-# Created by: PyQt5 UI code generator 5.8
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -86,7 +86,7 @@ class Ui_ApplicationWizard(object):
 
     def retranslateUi(self, ApplicationWizard):
         _translate = QtCore.QCoreApplication.translate
-        ApplicationWizard.setWindowTitle(_translate("ApplicationWizard", "Wizard"))
+        ApplicationWizard.setWindowTitle(_translate("ApplicationWizard", "Заявка"))
         self.label_3.setText(_translate("ApplicationWizard", "Дата поступления заявки"))
         self.label.setText(_translate("ApplicationWizard", "Тип заявки"))
         self.label_2.setText(_translate("ApplicationWizard", "Заказчик"))

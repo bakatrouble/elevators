@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_LoginForm(object):
     def setupUi(self, LoginForm):
         LoginForm.setObjectName("LoginForm")
-        LoginForm.resize(377, 264)
+        LoginForm.resize(377, 274)
         self.verticalLayout = QtWidgets.QVBoxLayout(LoginForm)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(LoginForm)
@@ -57,7 +57,7 @@ class Ui_LoginForm(object):
 
     def retranslateUi(self, LoginForm):
         _translate = QtCore.QCoreApplication.translate
-        LoginForm.setWindowTitle(_translate("LoginForm", "Dialog"))
+        LoginForm.setWindowTitle(_translate("LoginForm", "Вход"))
         self.label.setText(_translate("LoginForm", "Имя пользователя"))
         self.label_2.setText(_translate("LoginForm", "Пароль"))
         self.label_3.setText(_translate("LoginForm", "Адрес сервера"))

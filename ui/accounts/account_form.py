@@ -40,7 +40,7 @@ class Ui_AccountForm(object):
 
     def retranslateUi(self, AccountForm):
         _translate = QtCore.QCoreApplication.translate
-        AccountForm.setWindowTitle(_translate("AccountForm", "Dialog"))
+        AccountForm.setWindowTitle(_translate("AccountForm", "Счет"))
         self.label.setText(_translate("AccountForm", "Номер счета"))
         self.label_2.setText(_translate("AccountForm", "Дата счета"))
 

@@ -32,7 +32,7 @@ class ClientDialog(QDialog):
     def selectionChanged(self, index):
         self._result = index.internalPointer().id
         self.ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
-        self.ui.btnEdit.setEnabled(Options.get().autonomy_mode)
+        self.ui.btnEdit.setEnabled(not Options.get().autonomy_mode)
 
     def getResult(self):
         return self._result

@@ -37,6 +37,6 @@ class Ui_PrintDialog(object):
 
     def retranslateUi(self, PrintDialog):
         _translate = QtCore.QCoreApplication.translate
-        PrintDialog.setWindowTitle(_translate("PrintDialog", "Dialog"))
+        PrintDialog.setWindowTitle(_translate("PrintDialog", "Печать документа"))
         self.btnPrint.setText(_translate("PrintDialog", "Печать"))
 

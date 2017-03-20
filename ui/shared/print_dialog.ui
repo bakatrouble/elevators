@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Печать документа</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -43,7 +43,8 @@
          <string>Печать</string>
         </property>
         <property name="icon">
-         <iconset theme="document-print"/>
+         <iconset theme="document-print">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>

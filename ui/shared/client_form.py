@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'client_form.ui'
 #
-# Created by: PyQt5 UI code generator 5.8
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,10 +19,10 @@ class Ui_CustomerForm(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -570, 368, 818))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 368, 818))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setContentsMargins(6, 6, 6, 6)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label.setObjectName("label")
@@ -119,7 +119,7 @@ class Ui_CustomerForm(object):
 
     def retranslateUi(self, CustomerForm):
         _translate = QtCore.QCoreApplication.translate
-        CustomerForm.setWindowTitle(_translate("CustomerForm", "Создание заказчика"))
+        CustomerForm.setWindowTitle(_translate("CustomerForm", "Заказчик"))
         self.label.setText(_translate("CustomerForm", "Полное наименование"))
         self.label_2.setText(_translate("CustomerForm", "Краткое наименование"))
         self.label_3.setText(_translate("CustomerForm", "Юридический адрес"))

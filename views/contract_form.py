@@ -21,12 +21,11 @@ class ContractForm(QDialog):
         self._contract = Contract()
 
     def setupSignals(self):
-        # self.ui.btnSelectClient.clicked.connect(self.selectClient)
+        self.ui.btnSelectClient.clicked.connect(self.selectClient)
         pass
 
     def setupUi(self):
         self.ui.edtContractDate.setDate(QDate().currentDate())
-        self.ui.edtContractFinishDate.setDate(QDate().currentDate())
         self.ui.edtPOAClientDate.setDate(QDate().currentDate())
         self.ui.edtPOAContractorDate.setDate(QDate().currentDate())
 
@@ -44,7 +43,6 @@ class ContractForm(QDialog):
     def getContract(self):
         self._contract.number = self.ui.edtContractNumber.text()
         self._contract.date = self.ui.edtContractDate.date()
-        self._contract.finish_date = self.ui.edtContractFinishDate.date()
         self._contract.price = self.ui.edtPrice.value()
         self._contract.terms = self.ui.edtPaymentTerms.toHtml()
         self._contract.client = self._client
@@ -63,7 +61,6 @@ class ContractForm(QDialog):
         self._client = contract.client
         self.ui.edtContractNumber.setText(contract.number)
         self.ui.edtContractDate.setDate(contract.date)
-        self.ui.edtContractFinishDate.setDate(contract.finish_date)
         self.ui.edtPrice.setValue(contract.price)
         self.ui.edtPaymentTerms.setHtml(contract.terms)
         self.ui.lblClient.setText(contract.client.short_name)

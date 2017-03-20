@@ -66,20 +66,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Дата окончания работ по договору</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDateEdit" name="edtContractFinishDate">
-         <property name="calendarPopup">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Стоимость выполнения работ по договору</string>
@@ -135,6 +121,13 @@
             </property>
             <property name="text">
              <string>&lt;не выбрано&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnSelectClient">
+            <property name="text">
+             <string>...</string>
             </property>
            </widget>
           </item>

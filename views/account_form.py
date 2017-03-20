@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QDialog
 
 from models.items.account import Account
@@ -12,7 +13,12 @@ class AccountForm(QDialog):
         self.ui = Ui_AccountForm()
         self.ui.setupUi(self)
 
+        self.setupUi()
+
         self._account = Account()
+
+    def setupUi(self):
+        self.ui.edtDate.setDate(QDate().currentDate())
 
     def setApplication(self, application: Application):
         self._account.application_id = application.id
