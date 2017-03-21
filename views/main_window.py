@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
         self.ui.btnPrintOrder.clicked.connect(self.printOrder)
 
         self.ui.actExit.triggered.connect(die)
+        self.ui.actAbout.triggered.connect(self.showAbout)
 
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
@@ -107,6 +108,7 @@ class MainWindow(QMainWindow):
 
     def createApplication(self):
         Models.get().applications.createApplication(self)
+        self.tblApplicationsSelectionChanged(None, None)
 
     def editApplication(self):
         Models.get().applications.editApplication(self.ui.tblApplications.currentIndex(), self)
@@ -126,11 +128,11 @@ class MainWindow(QMainWindow):
 
     def createContract(self):
         ContractController.create(self.currentApplication(), self)
-        self.setupContract()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def editContract(self):
         ContractController.edit(self.currentApplication().contract, self)
-        self.setupContract()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def printContract(self):
         try:
@@ -150,11 +152,11 @@ class MainWindow(QMainWindow):
 
     def createAccount(self):
         AccountController.create(self.currentApplication(), self)
-        self.setupAccount()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def editAccount(self):
         AccountController.edit(self.currentApplication().account, self)
-        self.setupAccount()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def printAccount(self):
         try:
@@ -175,11 +177,11 @@ class MainWindow(QMainWindow):
 
     def createOrder(self):
         OrderController.create(self.currentApplication(), self)
-        self.setupOrder()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def editOrder(self):
         OrderController.edit(self.currentApplication().order, self)
-        self.setupOrder()
+        self.tblApplicationsSelectionChanged(None, None)
 
     def printOrder(self):
         try:
@@ -198,3 +200,6 @@ class MainWindow(QMainWindow):
         except exceptions.TemplateError as e:
             QMessageBox().warning(self, 'Ошибка', 'Произошла ошибка при печати шаблона:\n%s' % e.message)
             return
+
+    def showAbout(self):
+        QMessageBox().information(self, 'О программе', '')

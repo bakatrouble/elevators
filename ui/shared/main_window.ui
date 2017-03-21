@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Лифты</string>
+   <string>Система электронной документации</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -358,6 +358,7 @@
     <property name="title">
      <string>Меню</string>
     </property>
+    <addaction name="actAbout"/>
     <addaction name="actExit"/>
    </widget>
    <addaction name="menu"/>
@@ -371,6 +372,11 @@
   <action name="actExit">
    <property name="text">
     <string>Выход</string>
+   </property>
+  </action>
+  <action name="actAbout">
+   <property name="text">
+    <string>О программе</string>
    </property>
   </action>
  </widget>

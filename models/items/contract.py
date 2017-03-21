@@ -9,8 +9,9 @@ class Contract:
         self.application_id = None
         self.number = ''
         self.date = QDate().currentDate()
+        self.terms = 0
         self.price = 0.
-        self.terms = ''
+        self.advance = 0.
         self.client = None
         self.poa_client = False
         self.poa_client_number = ''
@@ -26,8 +27,9 @@ class Contract:
         obj.application_id = data['application']
         obj.number = data['number']
         obj.date = QDate().fromString(data['date'], 'yyyy-MM-dd')
-        obj.price = data['price']
         obj.terms = data['terms']
+        obj.price = data['price']
+        obj.advance = data['advance']
         obj.client = ClientModel.getItemById(data['client'])
         obj.poa = data['poa_client']
         obj.poa_number = data['poa_client_number']
@@ -43,8 +45,9 @@ class Contract:
             'application': self.application_id,
             'number': self.number,
             'date': self.date.toString('yyyy-MM-dd'),
-            'price': self.price,
             'terms': self.terms,
+            'price': self.price,
+            'advance': self.advance,
             'poa_client': self.poa_client,
             'poa_client_number': self.poa_client_number,
             'poa_client_date': self.poa_client_date.toString('yyyy-MM-dd'),

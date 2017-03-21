@@ -22,12 +22,18 @@ class ContractForm(QDialog):
 
     def setupSignals(self):
         self.ui.btnSelectClient.clicked.connect(self.selectClient)
-        pass
+        self.ui.cmbPaymentTerms.currentIndexChanged.connect(self.termsChanged)
 
     def setupUi(self):
         self.ui.edtContractDate.setDate(QDate().currentDate())
         self.ui.edtPOAClientDate.setDate(QDate().currentDate())
         self.ui.edtPOAContractorDate.setDate(QDate().currentDate())
+
+    def termsChanged(self, index):
+        self.ui.lblAdvance.setEnabled(index == 2)
+        self.ui.edtAdvanceSum.setEnabled(index == 2)
+        if index != 2:
+            self.ui.edtAdvanceSum.setValue(0.)
 
     def selectClient(self):
         result, client = ClientController.choose(self)
@@ -43,8 +49,9 @@ class ContractForm(QDialog):
     def getContract(self):
         self._contract.number = self.ui.edtContractNumber.text()
         self._contract.date = self.ui.edtContractDate.date()
+        self._contract.terms = self.ui.cmbPaymentTerms.currentIndex()
         self._contract.price = self.ui.edtPrice.value()
-        self._contract.terms = self.ui.edtPaymentTerms.toHtml()
+        self._contract.advance = self.ui.edtAdvanceSum.value()
         self._contract.client = self._client
         self._contract.poa_client = self.ui.chkPOAClient.isChecked()
         if self.ui.chkPOAClient.isChecked():
@@ -61,8 +68,9 @@ class ContractForm(QDialog):
         self._client = contract.client
         self.ui.edtContractNumber.setText(contract.number)
         self.ui.edtContractDate.setDate(contract.date)
+        self.ui.cmbPaymentTerms.setCurrentIndex(contract.terms)
         self.ui.edtPrice.setValue(contract.price)
-        self.ui.edtPaymentTerms.setHtml(contract.terms)
+        self.ui.edtAdvanceSum.setValue(contract.advance)
         self.ui.lblClient.setText(contract.client.short_name)
         self.ui.chkPOAClient.setChecked(contract.poa_client)
         if contract.poa_client:

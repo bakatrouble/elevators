@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>585</width>
-    <height>765</height>
+    <width>412</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,12 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -24,8 +30,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>569</width>
-        <height>709</height>
+        <width>396</width>
+        <height>552</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -66,20 +72,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Стоимость выполнения работ по договору</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="edtPrice">
-         <property name="maximum">
-          <double>1000000000000000000000.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Условия оплаты</string>
@@ -87,7 +79,75 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="edtPaymentTerms"/>
+        <widget class="QComboBox" name="cmbPaymentTerms">
+         <item>
+          <property name="text">
+           <string>Предоплата</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Постоплата</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Авансовый платеж</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="1" column="0">
+           <widget class="QDoubleSpinBox" name="edtPrice">
+            <property name="maximum">
+             <double>1000000000000000000000.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Общая стоимость</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lblAdvance">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Сумма аванса</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="edtAdvanceSum">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximum">
+             <double>1000000000000000000000.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_6">

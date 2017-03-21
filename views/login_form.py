@@ -74,7 +74,6 @@ class LoginForm(QDialog):
         self.worker = None
 
     def setupUi(self):
-        self.ui.edtServerAddress.setText(Options.get().server_url)
         self.ui.edtUsername.setText(Options.get().username)
         if not Options.get().autonomy_available:
             self.ui.btnAutonomyMode.setEnabled(False)
@@ -85,7 +84,6 @@ class LoginForm(QDialog):
 
     def login(self):
         Options.get().username = self.ui.edtUsername.text()
-        Options.get().server_url = self.ui.edtServerAddress.text()
 
         self.ui.btnAutonomyMode.setEnabled(False)
         self.ui.btnLogin.setEnabled(False)

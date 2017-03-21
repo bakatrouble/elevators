@@ -14,7 +14,7 @@ sav_path = os.path.join(os.path.expanduser('~'), '.elevators.sav')
 
 class OptionsStructure:
     def __init__(self):
-        self.server_url = '127.0.0.1:8000'
+        self.server_url = '95.213.195.180'
         self.autonomy_available = False
         self.autonomy_mode = False
 

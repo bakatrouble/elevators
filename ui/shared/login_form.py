@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_LoginForm(object):
     def setupUi(self, LoginForm):
         LoginForm.setObjectName("LoginForm")
-        LoginForm.resize(377, 274)
+        LoginForm.resize(377, 212)
         self.verticalLayout = QtWidgets.QVBoxLayout(LoginForm)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(LoginForm)
@@ -27,12 +27,6 @@ class Ui_LoginForm(object):
         self.edtPassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.edtPassword.setObjectName("edtPassword")
         self.verticalLayout.addWidget(self.edtPassword)
-        self.label_3 = QtWidgets.QLabel(LoginForm)
-        self.label_3.setObjectName("label_3")
-        self.verticalLayout.addWidget(self.label_3)
-        self.edtServerAddress = QtWidgets.QLineEdit(LoginForm)
-        self.edtServerAddress.setObjectName("edtServerAddress")
-        self.verticalLayout.addWidget(self.edtServerAddress)
         self.lblStatus = QtWidgets.QLabel(LoginForm)
         self.lblStatus.setText("")
         self.lblStatus.setObjectName("lblStatus")
@@ -48,6 +42,7 @@ class Ui_LoginForm(object):
         self.btnAutonomyMode.setObjectName("btnAutonomyMode")
         self.horizontalLayout.addWidget(self.btnAutonomyMode)
         self.btnLogin = QtWidgets.QPushButton(self.horizontalWidget)
+        self.btnLogin.setDefault(True)
         self.btnLogin.setObjectName("btnLogin")
         self.horizontalLayout.addWidget(self.btnLogin)
         self.verticalLayout.addWidget(self.horizontalWidget)
@@ -60,8 +55,6 @@ class Ui_LoginForm(object):
         LoginForm.setWindowTitle(_translate("LoginForm", "Вход"))
         self.label.setText(_translate("LoginForm", "Имя пользователя"))
         self.label_2.setText(_translate("LoginForm", "Пароль"))
-        self.label_3.setText(_translate("LoginForm", "Адрес сервера"))
-        self.edtServerAddress.setText(_translate("LoginForm", "127.0.0.1:8000"))
         self.btnAutonomyMode.setText(_translate("LoginForm", "Автономный режим"))
         self.btnLogin.setText(_translate("LoginForm", "Войти"))
 

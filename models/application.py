@@ -26,7 +26,9 @@ class ApplicationModel(QStringListModel):
         return self._has_next_page and not Options.get().autonomy_mode
 
     def index(self, row, column=0, parent=None, *args, **kwargs):
-        return self.createIndex(row, column, self._items[row])
+        if 0 <= row < len(self._items):
+            return self.createIndex(row, column, self._items[row])
+        return QModelIndex()
 
     def fetchMore(self, index):
         headers = {'Authorization': 'Token ' + Options.get().token}

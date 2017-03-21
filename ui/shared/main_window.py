@@ -163,6 +163,9 @@ class Ui_MainWindow(object):
         self.actSyncLocalStorage.setObjectName("actSyncLocalStorage")
         self.actExit = QtWidgets.QAction(MainWindow)
         self.actExit.setObjectName("actExit")
+        self.actAbout = QtWidgets.QAction(MainWindow)
+        self.actAbout.setObjectName("actAbout")
+        self.menu.addAction(self.actAbout)
         self.menu.addAction(self.actExit)
         self.menubar.addAction(self.menu.menuAction())
 
@@ -171,7 +174,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Лифты"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Система электронной документации"))
         self.label.setText(_translate("MainWindow", "Заявки"))
         self.btnPrintApplication.setText(_translate("MainWindow", "Печать"))
         self.btnCreateApplication.setText(_translate("MainWindow", "Создать"))
@@ -194,4 +197,5 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "Меню"))
         self.actSyncLocalStorage.setText(_translate("MainWindow", "Синхронизация локальных заявок"))
         self.actExit.setText(_translate("MainWindow", "Выход"))
+        self.actAbout.setText(_translate("MainWindow", "О программе"))
 
