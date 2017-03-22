@@ -142,6 +142,7 @@ class ApplicationEntry:
             editor.dialog.rejected.connect(lambda: delegate.closeEditor.emit(editor, QStyledItemDelegate.NoHint))
         elif column == 6:
             editor = QSpinBox(parent)
+            editor.setMaximum(100000000000)
         elif column == 8:
             editor = QDateEdit(parent)
             editor.setCalendarPopup(True)
