@@ -15,9 +15,17 @@ class ApplicationModel(QStringListModel):
         self._items = Options.get().local_applications.copy()
         self._next = None
         self._has_next_page = True
+        self._search_date = None
+        self._search_number = None
 
-    def resetInternalData(self):
+    def search(self, number=None, date=None):
+        self._search_date = date
+        self._search_number = number
+        self.beginResetModel()
+        self._next = None
+        self._has_next_page = True
         self._items = Options.get().local_applications.copy()
+        self.endResetModel()
 
     def rowCount(self, parent=None, *args, **kwargs):
         return len(self._items)
@@ -34,8 +42,12 @@ class ApplicationModel(QStringListModel):
         headers = {'Authorization': 'Token ' + Options.get().token}
         try:
             if not self._next:
-                data = requests.get('http://' + Options.get().server_url + '/api/applications/',
-                                    headers=headers).json()
+                url = 'http://' + Options.get().server_url + '/api/applications/?'
+                if self._search_date:
+                    url += 'contract_date=' + self._search_date.toString('yyyy-MM-dd') + '&'
+                if self._search_number:
+                    url += 'contract_number=' + self._search_number + '&'
+                data = requests.get(url, headers=headers).json()
             else:
                 data = requests.get(self._next).json()
         except requests.exceptions.ConnectionError:

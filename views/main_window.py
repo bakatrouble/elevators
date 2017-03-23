@@ -44,6 +44,14 @@ class MainWindow(QMainWindow):
         self.ui.actExit.triggered.connect(die)
         self.ui.actAbout.triggered.connect(self.showAbout)
 
+        self.ui.btnSearch.clicked.connect(self.search)
+
+    def search(self):
+        Models.get().applications.search(**{
+            'number': self.ui.edtNumberSearch.text() if self.ui.chkNumberSearch.isChecked() else None,
+            'date': self.ui.edtDateSearch.date() if self.ui.chkDateSearch.isChecked() else None,
+        })
+
     def tblApplicationsSelectionChanged(self, selected, deselected):
         if len(self.ui.tblApplications.selectedIndexes()):
             self.ui.btnEditApplication.setEnabled(not Options.get().autonomy_mode)
