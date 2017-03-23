@@ -1,7 +1,7 @@
 import requests
 import requests.exceptions
 import sys
-from PyQt5.QtCore import QModelIndex, Qt, QStringListModel
+from PyQt5.QtCore import QModelIndex, Qt, QAbstractTableModel
 from PyQt5.QtWidgets import QMessageBox
 
 from models.items.application import Application
@@ -9,7 +9,7 @@ from utils import Options, die
 from views.application_wizard import ApplicationWizard
 
 
-class ApplicationModel(QStringListModel):
+class ApplicationModel(QAbstractTableModel):
     def __init__(self):
         super(ApplicationModel, self).__init__()
         self._items = Options.get().local_applications.copy()
@@ -54,27 +54,15 @@ class ApplicationModel(QStringListModel):
             QMessageBox().warning(None, 'Ошибка', 'Соединение с сервером потеряно. Программа будет закрыта.')
             die()
             return
-        self.beginInsertRows(QModelIndex(), len(self._items), len(self._items) + len(data['results']))
+        self.beginInsertRows(QModelIndex(), len(self._items), len(self._items) + len(data['results']) - 1)
         for item in data['results']:
             self._items.append(Application.fromDict(item))
         self.endInsertRows()
         self._next = data['next']
         self._has_next_page = bool(data['next'])
 
-    def data(self, index, role=None):
-        row = index.row()
-        item = self._items[row]
-        if role == Qt.DisplayRole:
-            if item.id:
-                return '№%s от %s, %s, %s' % (item.id, item.date.toString(Qt.DefaultLocaleShortDate),
-                                              item.client.short_name, item.type.name)
-            else:
-                return '[Локальная] %s, %s, %s' % (item.date.toString(Qt.DefaultLocaleShortDate),
-                                                   item.client.short_name, item.type.name)
-        return None
-
     def columnCount(self, *args, **kwargs):
-        return 1
+        return 6
 
     def saveItem(self, item):
         headers = {'Authorization': 'Token ' + Options.get().token}
@@ -94,7 +82,7 @@ class ApplicationModel(QStringListModel):
 
     def addItem(self, item):
         local = len(Options.get().local_applications)
-        self.beginInsertRows(QModelIndex(), local, local + 1)
+        self.beginInsertRows(QModelIndex(), local, local)
         self._items.insert(local, item)
         self.endInsertRows()
 
@@ -138,3 +126,43 @@ class ApplicationModel(QStringListModel):
 
     def flags(self, index):
         return super(ApplicationModel, self).flags(index) & ~Qt.ItemIsEditable
+
+    def data(self, index, role=None):
+        row = index.row()
+        column = index.column()
+        if not 0 <= row < len(self._items):
+            return None
+        item = self._items[row]
+        if role == Qt.DisplayRole:
+            if column == 0:
+                return item.id if item.id else 'Локальная'
+            elif column == 1:
+                return item.date.toString(Qt.DefaultLocaleShortDate)
+            elif column == 2:
+                return item.client.short_name
+            elif column == 3:
+                return item.type.name
+            elif column == 4:
+                if item.contract:
+                    return item.contract.date
+            elif column == 5:
+                if item.contract:
+                    return item.contract.number
+        return None
+
+    def headerData(self, column, orientation, role=None):
+        if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+            if column == 0:
+                return '№'
+            elif column == 1:
+                return 'Дата'
+            elif column == 2:
+                return 'Заказчик'
+            elif column == 3:
+                return 'Тип'
+            elif column == 4:
+                return 'Дата договора'
+            elif column == 5:
+                return 'Номер договора'
+        return None
+
